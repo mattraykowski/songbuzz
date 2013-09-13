@@ -18,6 +18,15 @@ var AuthController = {
         res.redirect('/');
     },
 
+    authenticated: function(req, res) {
+            if(req.user) {
+                res.send({ 'authenticated': true, 'current': req.user });
+            } else {
+                res.send('500');
+            }
+    },
+
+
     'github': function (req, res) {
         passport.authenticate('github', { failureRedirect: '/login' },
             function (err, user) {

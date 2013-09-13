@@ -1,100 +1,64 @@
-<!-- Default home page -->
-<!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,700italic,400,300,700' rel='stylesheet'/> -->
-<link href='http://sailsjs.org/styles/fonts.css' rel='stylesheet'/>
-<link href='styles/main.css' rel='stylesheet'/>
-<!--[if IE 7]>
-<link href='styles/ie7.css' rel='stylesheet'/>
-<![endif]-->
-
-<div class="top-bar">
-    <div class="container clearfix">
-        <img class="logo" src="http://sailsjs.org/images/sails-logo.jpg" />
-    </div>
-</div>
-
-<div class="container clearfix">
-    <div class="main">
-        <h1 id="main-title">Hi <%= user.name %>,</h1>
-        <p>You've successfully logged in.</p>
-        <a class="btn" href="/logout">Logout</a>
-
-        <h2>User Model</h2>
-        <table class="table">
-            <% for(key in user.toJSON() ) { %>
-            <tr>
-                <td><%= key %>: </td>
-                <td class="boxy"><%= user[key] %></td>
-            </tr>
-            <% } %>
-        </table>
-
-        <h2>Getting started</h2>
-        <p>Don't worry, we've got your back.</p>
-        <div class="steps">
-            <ul class="getting-started">
-                <li>
-                    <div class="sprite one"></div>
-                    <div>
-                        <h3>Get your API going.</h3>
-                        <p>
-                            Run <span class="boxy">sails generate foo</span>.  This will create a model <span class="boxy">Foo</span> and controller <span class="boxy">FooController</span>
-                        </p>
+<div>
+    <div class="row">
+        <div class="col-md-10 col-xs-12" ng-controller="PlayerCtrl">
+            <div class="well">
+                <div class=" "
+                     ng-class="{'progress':true, 'progress-striped':(playState||pauseState), 'active':playState}">
+                    <div class="progress-bar progress-bar-info "
+                         ng-click="progressBarClick($event)"
+                         style="{{ 'width: ' + progress + '%'}}">
                     </div>
-                </li>
-                <li>
-                    <div class="sprite two"></div>
-                    <div>
-                        <h3>
-                            Lift your app.
-                        </h3>
-                        <p>
-                            Run <span class="boxy">sails lift</span> to start up your app.  If you visit <span class="boxy">http://localhost:1337/foo</span> in your browser, you'll see a socket.io-compatible REST API was generated for your 'Foo' model.
-                        </p>
-                    </div>
-                </li>
-                <li>
-                    <div class="sprite three"></div>
-                    <div>
-                        <h3>
-                            Dive in and start building.
-                        </h3>
-                        <p>From here, you can modify your models, create custom controller methods as Express middleware, and create custom routes (routes are set up in <span class="boxy">config/routes.js</span>).  Visit <a href="http://sailsjs.org">the Sails website</a> for more information on next steps.</p>
-                    </div>
-                </li>
-            </ul>
+                </div>
+                <div id="playingDescr">
+                    Now Playing: {{ getSongTitle() }} :: {{ friendlyDuration(getCurrentDuration()) }}
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-xs"
+                            ng-click="playPreviousButton()">
+                        <i  class="glyphicon glyphicon-step-backward"></i>
+                    </button>
+                    <button id="player-pause-btn"
+                            ng-class="{'btn':true, 'btn-xs':true, 'active':pauseState}"
+                            ng-click="pauseButton()">
+                        <i class="glyphicon glyphicon-pause"></i>
+                    </button>
+                    <button id="player-stop-btn"
+                            class="btn btn-xs"
+                            ng-click="stopButton()">
+                        <i class="glyphicon glyphicon-stop"></i>
+                    </button>
+                    <button id="player-play-btn"
+                            ng-class="{'btn':true, 'btn-xs':true, 'active':playState}"
+                            ng-click="playButton()">
+                        <i class="glyphicon glyphicon-play"></i>
+                    </button>
+                    <button class="btn btn-xs"
+                            ng-click="playNextButton()">
+                        <i class="glyphicon glyphicon-step-forward"></i>
+                    </button>
+                    <button class="btn btn-xs"
+                            ng-click="toggleVisible()">
+                        <i class="glyphicon glyphicon-facetime-video"></i>
+                    </button>
+                </div>
+                <player-view/>
+            </div>
         </div>
-        <div class="delete">
-            <div class="sprite">You're looking at: <span class="boxy">views/home/index.ejs</span></div>
+        <div class="col-xs-12 col-md-2">
+            <div class="well well-large">
+                <h5>Activity Feed</h5>
+            </div>
         </div>
     </div>
-    <div class="side-bar">
-        <h4 id="new">
-            New to Sails?
-        </h4>
-        <ul>
-            <li>
-                <a href="http://sailsjs.org">Visit sailsjs.org</a>
-            </li>
-            <li>
-                <a href="http://sailsjs.org/#documentation">Documentation</a>
-            </li>
-        </ul>
-        <h4>
-            Next Steps
-        </h4>
-        <ul>
-            <li class="sprite single_page">
-                <a target="_blank" href="http://sailsjs.org">Build a single page app</a>
-            </li>
-            <li class="sprite traditional">
-                <a target="_blank" href="http://sailsjs.org">Build a traditional webapp</a>
-            </li>
-            <li class="sprite realtime">
-                <a target="_blank" href="http://sailsjs.org">Build a realtime app</a>
-            </li>
-            <li class="sprite api">
-                <a target="_blank" href="http://sailsjs.org">Build an API</a>
-            </li>
-        </ul>
-    </div>
 </div>
+<div class="row">
+<div class="col-md-4">
+    <!-- Playlist List -->
+    <div ng-include src="'/partials/playlist-list.html'"></div>
+</div>
+<div class="col-xs-12 col-md-8">
+    <!-- Playlist Detail -->
+    <div ng-view></div>
+</div>
+</div>
+        </div>

@@ -1,25 +1,91 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%- title %></title>
+<html lang="en" ng-app="songbuzz">
+<head>
+    <meta charset="utf-8">
+    <title>SongBuzz</title>
 
     <!-- Viewport mobile tag for sensible mobile support -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-  <body>
+    <!-- Bootstrap 3 -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="/stylesheets/angular-ui.css" type="text/css" />
+
+    <script src="/js/lib/jquery/jquery.min.js"></script>
+    <script src="/js/lib/jquery/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="/js/lib/bootstrap/bootstrap.min.js"></script>
+    <script src="/js/lib/angular/angular.js"></script>
+    <script src="/js/lib/angular/angular-resource.js"></script>
+    <script src="/js/lib/angularui/angular-ui.js"></script>
+
+    <script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
+    <script type="text/javascript" src="http://cdn.jsdelivr.net/restangular/latest/restangular.js"></script>
+
+    <script src="/js/songbuzzApp.js"></script>
+    <script src="/js/services.js"></script>
+    <script src="/js/controllers.js"></script>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+
+</head>
+
+<body ng-controller="MainController">
+<!-- Navbar -->
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle Navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">SongBuzz</a>
+    </div>
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+            <li>
+                <a href="#/index">Home</a>
+            </li>
+            <li>
+                <a href="#/playlists">Playlists</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav pull-right">
+            <li ng-hide="loggedIn">
+                <a href="/login">Login</a>
+            </li>
+            <li ng-hide="!loggedIn">
+                <a href="/logout">Logout</a>
+            </li>
+        </ul>
+    </div>
+
+</nav>
+
+<div class="container">
     <%- body %>
+</div>
 
-    <!-- A few key dependencies, linked in order -->
 
-    <!-- Bring in the socket.io client -->
-    <script type="text/javascript" src="/js/socket.io.js"></script>
-    
-    <!-- then beef it up with some convenience logic for talking to Sails.js -->
-    <script type="text/javascript" src="/js/sails.io.js"></script>
+<!-- A few key dependencies, linked in order -->
 
-    <!-- listen on socket.io for incoming messages -->
-    <script type="text/javascript" src="/js/app.js"></script>
+<!-- Bring in the socket.io client -->
+<script type="text/javascript" src="/js/socket.io.js"></script>
 
-    </body>
+<!-- then beef it up with some convenience logic for talking to Sails.js -->
+<script type="text/javascript" src="/js/sails.io.js"></script>
+
+<!-- listen on socket.io for incoming messages -->
+<script type="text/javascript" src="/js/app.js"></script>
+
+<!-- Bootstrap 3 -->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>
+
+</body>
 </html>

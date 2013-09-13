@@ -41,10 +41,11 @@ module.exports.adapters = {
 
   mongo: {
       module   : 'sails-mongo',
-      host     : 'localhost',
-      port     : 27017,
-      user     : '',
-      password : '',
-      database : 'sails-social-auth'
+      host     : process.env.SB_MONGO_HOST || 'localhost',
+      port     : process.env.SB_MONGO_PORT || 27017,
+      user     : process.env.SB_MONGO_USER || '',
+      password : process.env.SB_MONGO_PASS || '',
+      database : process.env.SB_MONGO_DB || 'songbuzz'
   }
+
 };

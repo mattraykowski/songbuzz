@@ -1,0 +1,32 @@
+<div ng-controller="PlaylistListCtrl">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Playlists</th>            
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="playlist in playlists | filter:query">
+                <td><a href="#/playlists/{{playlist.id}}" ng-click="changePlaylist($index)">{{playlist.title}}</a></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>{{playlists.length}} playlists.</td>
+            </tr>
+            <tr>
+                <!-- filter playlists -->
+                <td><input ng-model="query" placeholder="filter playlists..."></td> 
+            </tr>
+        </tfoot>
+    </table>
+    
+    <p>Add Playlist</p>
+    
+    <div class="input-group">
+        <input ng-model="playlistTitle" placeholder="Enter new playlist name..." class="form-control">
+        <span class="input-group-btn">
+            <button class="btn btn-primary" ng-click="addNewPlaylist()"><i class="glyphicon glyphicon-plus icon-white"></i></button>
+        </span>
+    </div>
+</div>

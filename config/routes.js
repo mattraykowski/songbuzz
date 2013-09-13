@@ -40,6 +40,29 @@ module.exports.routes = {
   '/logout' : {
     controller : 'auth',
     action     : 'logout'
+  },
+
+
+  // The Playlist Controller
+  'get /playlist/:id': {
+    controller: 'playlist',
+    action: 'find',
+  },
+  'post /playlist': {
+    controller: 'playlist',
+    action: 'create'
+  },
+  'put /playlist/:id': {
+    controller: 'playlist',
+    action: 'update'
+  },
+  'delete /playlist/:id': {
+    controller: 'playlist',
+    action: 'update'
+  },
+  'get /playlist': {
+    controller: 'playlist',
+    action: 'index'
   }
 
   /*

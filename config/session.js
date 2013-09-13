@@ -37,13 +37,15 @@ module.exports.session = {
   // Uncomment the following lines to use your Mongo adapter as a session store
   adapter: 'mongo',
 
-  host: 'localhost',
-  port: 27017,
-  db: 'sails-social-auth',
+  host: process.env.SB_MONGO_HOST || 'localhost',
+  port: process.env.SB_MONGO_PORT || 27017,
+  username: process.env.SB_MONGO_USER || '',
+  password: process.env.SB_MONGO_PASS || '',
+  db: process.env.SB_MONGO_DB || 'songbuzz',
   collection: 'sessions',
 
   cookie: {
-    originalMaxAge: 900000 // 15 min
+    originalMaxAge: (60000 * 60 * 24 * 30) // 30 days
   }
 
   //
@@ -52,8 +54,6 @@ module.exports.session = {
   // # Note: url will override other connection settings
   // url: 'mongodb://user:pass@host:port/database/collection',
   //
-  // username: '',
-  // password: '',
   // auto_reconnect: false,
   // ssl: false,
   // stringify: true
