@@ -19,12 +19,23 @@ songbuzzApp.config(['$routeProvider', '$locationProvider', 'RestangularProvider'
     RestangularProvider.setBaseUrl('');
 }]);
 
+songbuzzApp.directive('ytSelect', function() {
+  return {
+    restrict: 'E',
+    replace: true,
+    transclude: true,
+    template: '<input class="form-control input-sm" id="e7" />',
+    link: function(scope, element, attrs) {
+      element.select2({placeholder: "Search for music..."});
+    }
+  };
+});
 songbuzzApp.directive('ytAutocomplete', function() {
     return {
         restrict: 'E',
         replace: true,
         transclude: true,
-        template: '<input id="appendedInputButton" type="search" placeholder="search for new songs..." class="span2" size="200" ng-model="ytSearchParameter" />',
+        template: '<input id="appendedInputButton" type="search" placeholder="search for new songs..." class="form-control input-sm" size="200" ng-model="ytSearchParameter" />',
         link: function(scope, element, attrs) {
             scope.$watch(attrs.list, function(value) {
                 element.autocomplete({
