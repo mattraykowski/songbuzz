@@ -13,7 +13,7 @@
         "passport-github": "0.1.5",
         "passport-google-oauth": "0.1.5",
         "sails-mongo": "0.9.3",
-        "bower": "1.2.6"
+        "bower": "0.6.x"
     },
     "scripts": {
         "start": "node app.js",
