@@ -13,12 +13,16 @@
         "passport-github": "0.1.5",
         "passport-google-oauth": "0.1.5",
         "sails-mongo": "0.9.3",
-        "bower": "0.6.x"
+        "bower": "1.2.6"
     },
     "scripts": {
         "start": "node app.js",
         "debug": "node debug app.js",
         "postinstall": "./node_modules/bower/bin/bower install"
+    },
+    "engines": {
+      "node": ">=0.10.0",
+      "npm": ">=1.2.0"
     },
     "main": "app.js",
     "repository": "",
