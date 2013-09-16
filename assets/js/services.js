@@ -192,6 +192,7 @@ songbuzzApp.factory('PlayerService', function($rootScope) {
 
         // This function makes the YT API play a new video ID.
         play: function() {
+            console.log(this.currentSong.videoId);
             this.ytPlayer.cueVideoById(this.currentSong.videoId);
             this.ytPlayer.playVideo();
         },

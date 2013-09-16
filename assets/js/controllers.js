@@ -230,33 +230,17 @@ function($rootScope, $scope, $timeout, $routeParams, PlayerService, Restangular)
    // };
     
     $scope.formatYtSong = function(vid) {
-      var title = vid.title.$t;
-      var viewCount = vid.yt$statistics.viewCount;
-      var videoId = vid.id.$t.slice(vid.id.$t.lastIndexOf('/') + 1, vid.id.$t.length);
-      var linkUrl = '';
-      var thumbUrl = '';
-      var duration = vid.media$group.yt$duration.seconds;
-
-      vid.link.forEach(function(element, index, array) {
-        if (element.rel == 'alternate') {
-          linkUrl = element.href;
-        }
-      });
-
-      var foundThumb = false;
-      vid.media$group.media$thumbnail.forEach(function(element, index, array) {
-        if (element.height == 90 && !foundThumb) {
-          thumbUrl = element.url;
-        }
-      });
+      var title = vid.snippet.title;
+      var viewCount = 0;
+      var videoId = vid.id.videoId;
+      var thumbUrl = vid.snippet.thumbnails.default.url;
+      //var duration = vid.media$group.yt$duration.seconds;
 
       var entry = {
         title: title,
         viewCount: viewCount,
         videoId: videoId,
-        url: linkUrl,
         thumbUrl: thumbUrl,
-        duration: duration
       };
 
       return entry;

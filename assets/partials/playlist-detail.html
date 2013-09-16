@@ -14,7 +14,6 @@
         <tr>
             <th>&nbsp;</th> <!-- image thumbnail -->
             <th>Song</th>
-            <th>Length</th>
             <th><input ng-model="songFilter" placeholder="filter songs..."></th> <!-- song actions -->
         </tr>
     </thead>
@@ -22,7 +21,6 @@
         <tr ng-repeat="song in playlist.songs | filter:songFilter">
             <td><img src="{{song.thumbUrl}}" width="48" heigth="48"/></td>
             <td>{{song.title}}</td>
-            <td>{{friendlyDuration(song.duration)}}</td>
             <td>
                 <div class="btn-group">
                     <button class="btn" ng-click="removeSong($index)"><i class="glyphicon glyphicon-remove"></i></button>
