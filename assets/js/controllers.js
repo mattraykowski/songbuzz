@@ -263,6 +263,7 @@ function($rootScope, $scope, $timeout, $routeParams, PlayerService, Restangular)
     };
     
     $scope.doAddSelectedSong = function() {
+        console.log($scope.ytSelectVideo);
         if($scope.ytSelectVideo == undefined || $scope.ytSelectVideo == null) {
           return; // Can't do anything if the button was erroneously clicked.
         }
@@ -277,6 +278,8 @@ function($rootScope, $scope, $timeout, $routeParams, PlayerService, Restangular)
         
         // Save the playlist.
         $scope.playlist.put();
+
+        $rootScope.$broadcast("ytSelectSongAdded");
     };
 
     $scope.removeSong = function(idx) {
