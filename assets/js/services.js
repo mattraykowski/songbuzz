@@ -11,62 +11,62 @@
 //    });
 //});
 
-songbuzzApp.factory('YouTubeAPI', function($http) {
-    var ytApi = {
-        apiKey: 'AI39si5fQp3u-rWZRzNeycrh-4zMK2tV2yq4_eI72kf2gH0fQzl1NJgZjwFkiUwvoxPmYeKWa3Q2-2bWLE2FYY-TZISue6WswA',
-        execQuery: function(searchTerm, response) {
-            return $http.jsonp('https://gdata.youtube.com/feeds/api/videos', {
-                params: {
-                    'alt': 'json-in-script',
-                    'category': 'Music',
-                    'key': this.apiKey,
-                    'q': searchTerm,
-                    'callback': 'JSON_CALLBACK'
-                }
-            }).success(function(data, status, headers, config) {
-                var retArray = data.feed.entry.map(function(vid) {
-                    var title = vid.title.$t;
-                    var viewCount = vid.yt$statistics.viewCount;
-                    var videoId = vid.id.$t.slice(vid.id.$t.lastIndexOf('/') + 1, vid.id.$t.length);
-                    var linkUrl = '';
-                    var thumbUrl = '';
-                    var duration = vid.media$group.yt$duration.seconds;
-
-                    vid.link.forEach(function(element, index, array) {
-                        if (element.rel == 'alternate') {
-                            linkUrl = element.href;
-                        }
-                    });
-                    
-                    var foundThumb = false;
-                    vid.media$group.media$thumbnail.forEach(function(element, index, array) {
-                        if (element.height == 90 && !foundThumb) {
-                            thumbUrl = element.url;
-                        }
-                    });
-
-                    var entry = {
-                        title: title,
-                        viewCount: viewCount,
-                        videoId: videoId,
-                        url: linkUrl,
-                        thumbUrl: thumbUrl,
-                        duration: duration
-                    };
-
-                    return entry;
-
-                });
-
-                response(retArray);
-            }).error(function(data, status, headers, config) {
-                response([]);
-            });
-        }
-    };
-
-    return ytApi;
-});
+//songbuzzApp.factory('YouTubeAPI', function($http) {
+//    var ytApi = {
+//        apiKey: 'AI39si5fQp3u-rWZRzNeycrh-4zMK2tV2yq4_eI72kf2gH0fQzl1NJgZjwFkiUwvoxPmYeKWa3Q2-2bWLE2FYY-TZISue6WswA',
+//        execQuery: function(searchTerm, response) {
+//            return $http.jsonp('https://gdata.youtube.com/feeds/api/videos', {
+//                params: {
+//                    'alt': 'json-in-script',
+//                    'category': 'Music',
+//                    'key': this.apiKey,
+//                    'q': searchTerm,
+//                    'callback': 'JSON_CALLBACK'
+//                }
+//            }).success(function(data, status, headers, config) {
+//                var retArray = data.feed.entry.map(function(vid) {
+//                    var title = vid.title.$t;
+//                    var viewCount = vid.yt$statistics.viewCount;
+//                    var videoId = vid.id.$t.slice(vid.id.$t.lastIndexOf('/') + 1, vid.id.$t.length);
+//                    var linkUrl = '';
+//                    var thumbUrl = '';
+//                    var duration = vid.media$group.yt$duration.seconds;
+//
+//                    vid.link.forEach(function(element, index, array) {
+//                        if (element.rel == 'alternate') {
+//                            linkUrl = element.href;
+//                        }
+//                    });
+//                    
+//                    var foundThumb = false;
+//                    vid.media$group.media$thumbnail.forEach(function(element, index, array) {
+//                        if (element.height == 90 && !foundThumb) {
+//                            thumbUrl = element.url;
+//                        }
+//                    });
+//
+//                    var entry = {
+//                        title: title,
+//                        viewCount: viewCount,
+//                        videoId: videoId,
+//                        url: linkUrl,
+//                        thumbUrl: thumbUrl,
+//                        duration: duration
+//                    };
+//
+//                    return entry;
+//
+//                });
+//
+//                response(retArray);
+//            }).error(function(data, status, headers, config) {
+//                response([]);
+//            });
+//        }
+//    };
+//
+//    return ytApi;
+//});
 
 //songbuzzApp.factory('PlayerService', function($rootScope) {
 //    var playerService = {

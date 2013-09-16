@@ -194,8 +194,7 @@ songbuzzApp.controller('PlaylistDetailCtrl', ['$rootScope',
                                                '$routeParams', 
                                                'PlayerService', 
                                                'Restangular', 
-                                               'YouTubeAPI',
-function($rootScope, $scope, $timeout, $routeParams, PlayerService, Restangular, YouTubeAPI) {
+function($rootScope, $scope, $timeout, $routeParams, PlayerService, Restangular) {
     $scope.playlistId = $routeParams.playlistId;
     $scope.searchResults = '';
     $scope.playingSong = {};
@@ -210,41 +209,76 @@ function($rootScope, $scope, $timeout, $routeParams, PlayerService, Restangular,
         $scope.playlist = PlayerService.currentPlaylist;
     });
 
-    $scope.updateSearchResults = function() {
-        if ($scope.searhTerms.length == 0) {
-            $scope.searchResults = '';
-        }
-        else {
-            YouTubeAPI.execQuery($scope.searhTerms, function(videos) {
-                $scope.searchResults = videos;
-            });
-        }
-    };
+    //$scope.updateSearchResults = function() {
+    //    if ($scope.searhTerms.length == 0) {
+    //        $scope.searchResults = '';
+    //    }
+    //    else {
+    //        YouTubeAPI.execQuery($scope.searhTerms, function(videos) {
+    //            $scope.searchResults = videos;
+    //        });
+    //    }
+    //};
 
-    $scope.doGetAutocomplete = function(request, response) {
-        YouTubeAPI.execQuery($scope.ytSearchParameter, response);
-    };
+    //$scope.doGetAutocomplete = function(request, response) {
+    //    YouTubeAPI.execQuery($scope.ytSearchParameter, response);
+    //};
 
-    $scope.doneAutocomplete = function(response) {
-        response($scope.autocompleteResult.Suggestions);
-        $scope.$apply();
+   // $scope.doneAutocomplete = function(response) {
+   //     response($scope.autocompleteResult.Suggestions);
+   //     $scope.$apply();
+   // };
+    
+    $scope.formatYtSong = function(vid) {
+      var title = vid.title.$t;
+      var viewCount = vid.yt$statistics.viewCount;
+      var videoId = vid.id.$t.slice(vid.id.$t.lastIndexOf('/') + 1, vid.id.$t.length);
+      var linkUrl = '';
+      var thumbUrl = '';
+      var duration = vid.media$group.yt$duration.seconds;
+
+      vid.link.forEach(function(element, index, array) {
+        if (element.rel == 'alternate') {
+          linkUrl = element.href;
+        }
+      });
+
+      var foundThumb = false;
+      vid.media$group.media$thumbnail.forEach(function(element, index, array) {
+        if (element.height == 90 && !foundThumb) {
+          thumbUrl = element.url;
+        }
+      });
+
+      var entry = {
+        title: title,
+        viewCount: viewCount,
+        videoId: videoId,
+        url: linkUrl,
+        thumbUrl: thumbUrl,
+        duration: duration
+      };
+
+      return entry;
     };
     
     $scope.doAddSelectedSong = function() {
+        if($scope.ytSelectVideo == undefined || $scope.ytSelectVideo == null) {
+          return; // Can't do anything if the button was erroneously clicked.
+        }
+        
+        // Songs aren't a default part of the object so force the array on if it's not defined.
+        if($scope.playlist != undefined && $scope.playlist.songs == undefined) {
+          $scope.playlist.songs =  [];
+        } 
+
         // Set the song settings
-        var song = {
-            title: $scope.selectedSong.title,
-            videoId: $scope.selectedSong.videoId,
-            url: $scope.selectedSong.url,
-            thumbUrl: $scope.selectedSong.thumbUrl,
-            duration: $scope.selectedSong.duration
-        };
-        $scope.playlist.songs.push(song);
+        $scope.playlist.songs.push($scope.formatYtSong($scope.ytSelectVideo));
         
         // Save the playlist.
         $scope.playlist.put();
     };
-    
+
     $scope.removeSong = function(idx) {
         $scope.playlist.songs.splice(idx,1);
         $scope.playlist.put();
