@@ -63,6 +63,11 @@ module.exports.routes = {
   'get /playlist': {
     controller: 'playlist',
     action: 'index'
+  },
+
+  'get /people': {
+    controller: 'people',
+    action: 'index'
   }
 
   /*

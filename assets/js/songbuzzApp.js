@@ -8,6 +8,9 @@ songbuzzApp.config(['$routeProvider', '$locationProvider', 'RestangularProvider'
     }).when("/playlists/:playlistId", {
         templateUrl: "/partials/playlist-detail.html",
         controller: 'PlaylistDetailCtrl'
+    }).when("/people", {
+      templateUrl: "/partials/people-detail.html",
+      controller: "PeopleController"
     }).when("/index", {
         templateUrl: "/partials/home.html",
         controller: "HomeCtrl"

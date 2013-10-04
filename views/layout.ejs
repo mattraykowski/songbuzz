@@ -40,13 +40,24 @@
             <li>
                 <a href="#/playlists">Playlists</a>
             </li>
+            <li>
+                <a href="#/people">People</a>
+            </li>
         </ul>
         <ul class="nav navbar-nav pull-right">
             <li ng-hide="loggedIn">
                 <a href="/login">Login</a>
             </li>
-            <li ng-hide="!loggedIn">
-                <a href="/logout">Logout</a>
+            <li class="dropdown" ng-hide="!loggedIn">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <img src="{{currentUser.picture}}" width="25" height="25">
+                    {{currentUser.name}}
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/logout">Logout</a></li>
+                    <li><a href="#">Profile</a></li>
+                </ul>
             </li>
         </ul>
     </div>
