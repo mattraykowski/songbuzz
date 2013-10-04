@@ -25,6 +25,7 @@ results
 
 npm-debug.log
 node_modules
+assets/components
 
 ########################
 # misc / editors
