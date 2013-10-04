@@ -26,6 +26,15 @@ module.exports = {
                 function(token, tokenSecret, profile, done) {
                     User.findOne({uid: parseInt(profile.id) }).done(function (err, user) {
                         if(user) {
+                            User.update({uid: parseInt(profile.id) },
+                                { name: profile.displayName, picture: profile._json.picture},
+                                function(err, updateUser) {
+                                    if(err) {
+                                        return console.log(err);
+                                    } else {
+                                        user = updateUser;
+                                    }
+                                });
                             return done(null, user);
                         } else {
                             User.create({
