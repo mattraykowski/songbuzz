@@ -1,40 +1,37 @@
-# Sails.js Social Auth example with Passport and MongoDB
+# SongBuzz
+### A YouTube/Last.fm Mashup
 
-## Available authentication strategies
-- Google+
-- GitHub
+SongBuzz is a cloud-based music player which plays songs from YouTube. It provides a streamlined wrapper over YouTube
+to simplify the experience for pure music listening.
 
-## Setup
+SongBuzz is inspired by MeoMix's [SongBuzz Chrome Extension](https://github.com/MeoMix/SongBuzz). Special thanks to him
+for the awesome idea.
 
-1. `git clone https://github.com/stefanbuck/sails-social-auth-example.git`
-2. `cd sails-social-auth-example`
-3. `npm install`
-4. Start your MongoDB from the command line `sudo mongod`
-5. Create an GitHub application here: https://github.com/settings/applications/new
-6. Define the application Name, URL (http://localhost:1337) and Callback URL (http://localhost:1337/auth/github/callback)
-7. In the `config/middleware.js` replace `YOUR_CLIENT_ID` and `YOUR_CLIENT_SECRET` with the generated keys
-8. `sails lift`
-9. Open `http://localhost:1337` in your favorite browser
+### SongBuzz Online
 
-## License
+Running at http://songbuzz.herokuapp.com
 
-The MIT License (MIT)
+### Using SongBuzz
 
-Copyright (c) 2013 Stefan Buck
+### Using SongBuzz ###
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-the Software, and to permit persons to whom the Software is furnished to do so,
-subject to the following conditions:
+SongBuzz is a simple to use application. You will first need to login using Google+ and it's simple - click the red 'with Google+' button.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Once you have logged you can begin by first creatng a playlist. Type in a name for your playlist,
+such as _"Chill Music"_ and then click the blue plus to add the playlist. Once you have a playlist or several of them click
+on a playlist to select it and on the bottom of the playlist panel start typing the name of a song you want and you will see
+a list of YouTube videos begin to populate. Click on the one you want and hit the plus sign to add it to your playlist.
+
+You can now click the play icon on the song and it will begin to play!
+
+### What we're using:
+
+- Sails.js (http://sailsjs.org/)
+- jQuery (http://www.jquery.com/)
+- jQueryUI (http://www.jqueryui.com/)
+- AngularJS (http://angularjs.org)
+- AngularUI (http://angular-ui.github.io/)
+- Twitter Bootstrap (https://github.com/twitter/bootstrap/)
+- Select2 (http://ivaynberg.github.io/select2/)
+
