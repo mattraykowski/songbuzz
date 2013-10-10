@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="songbuzz">
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>SongBuzz</title>
 
     <!-- Viewport mobile tag for sensible mobile support -->
@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" media="all" href="/components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" media="all" href="/components/bootstrap/dist/css/bootstrap-theme.css" />
     <link rel="stylesheet" type="text/css" media="all" href="/components/jquery-ui/themes/base/jquery.ui.css" />
-    <link rel="stylesheet" type="text/css" media="all" href="/components/select2/select2.css">
+    <link rel="stylesheet" type="text/css" media="all" href="/components/select2/select2.css" />
 
     <link rel="stylesheet" href="/stylesheets/style.css" />
 
@@ -22,7 +22,7 @@
 
 <body ng-controller="MainController">
 <!-- Navbar -->
-<nav class="navbar navbar-inverse" role="navigation">
+<nav class="navbar navbar-static-top navbar-inverse" role="navigation">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
             <span class="sr-only">Toggle Navigation</span>
@@ -64,9 +64,9 @@
 
 </nav>
 
-<div class="container">
+<!--<div class="container">-->
     <%- body %>
-</div>
+<!--</div>-->
 
 
 <!-- A few key dependencies, linked in order -->
@@ -96,8 +96,16 @@
 
 <!-- Core application JavaScript -->
 <script src="/js/songbuzzApp.js"></script>
-<script src="/js/services.js"></script>
-<script src="/js/controllers.js"></script>
+<script src="/js/services/player_service.js"></script>
+<script src="/js/directives/yt_select.js"></script>
+<script src="/js/directives/player_view.js"></script>
+<script src="/js/controllers/home_controller.js"></script>
+<script src="/js/controllers/main_controller.js"></script>
+<script src="/js/controllers/people_controller.js"></script>
+<script src="/js/controllers/player_controller.js"></script>
+<script src="/js/controllers/playlist_controller.js"></script>
+<script src="/js/controllers/playlist_detail_controller.js"></script>
+
 
 </body>
 </html>
