@@ -3,23 +3,33 @@
 songbuzzApp.controller('PlaylistListCtrl', ['$scope', '$timeout', 'PlayerService', 'Restangular',
     function ($scope, $timeout, PlayerService, Restangular) {
         $scope.playlists = [];
+        $scope.playlistService = Restangular.all('playlist');
 
         $scope.updatePlaylists = function () {
             //$scope.playlists = PlaylistService.query();
-            Restangular.all('playlist').getList().then(
+            $scope.playlistService.getList().then(
                 function (playlists) {
                     $scope.playlists = playlists;
-                    console.log($scope.playlists);
                 });
         };
 
         $scope.addNewPlaylist = function () {
-            Restangular.all('playlist').post({ title: $scope.playlistTitle});
-            $timeout($scope.updatePlaylists, 250);
+            $scope.playlistService.post({ title: $scope.playlistTitle})
+                .then(function(response) {
+                    console.log("HEEELLLPPP");
+                    $scope.updatePlaylists();
+                }, function() {
+                    console.log("There was an error adding a new playlist.");
+                });
+
+            //$timeout($scope.updatePlaylists, 250);
         };
 
-//    $scope.deletePlaylist = function() {
-//        Restangular.
+        $scope.deletePlaylist = function (playlist) {
+            playlist.remove().then(function () {
+                $scope.updatePlaylists();
+            });
+        };
 
         $scope.changePlaylist = function (idx) {
             PlayerService.changePlaylist($scope.playlists[idx]);

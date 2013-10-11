@@ -39,7 +39,6 @@ songbuzzApp.controller('PlaylistDetailCtrl', ['$rootScope',
         };
 
         $scope.doAddSelectedSong = function () {
-            console.log($scope.ytSelectVideo);
             if ($scope.ytSelectVideo == undefined || $scope.ytSelectVideo == null) {
                 return; // Can't do anything if the button was erroneously clicked.
             }

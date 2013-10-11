@@ -52,7 +52,8 @@
 
 
 var samplePlaylists = [
-    {   
+    {
+        remove: function() {},
         "__v":5,
         "_id":"509ad256be436abe20000002",
         "owner":"50a3d21fbf625a2560000002",
@@ -70,7 +71,8 @@ var samplePlaylists = [
         "$$hashKey":"008"
     },
     
-    {   
+    {
+        remove: function() {},
         "title":"Techno",
         "_id":"50a29a963eb878714d000005",
         "__v":0,
@@ -80,7 +82,8 @@ var samplePlaylists = [
         "$$hashKey":"00A"
     },
     
-    {   
+    {
+        remove: function() {},
         "title":"Country",
         "_id":"50a29a8e3eb878714d000004",
         "__v":0,
@@ -91,6 +94,7 @@ var samplePlaylists = [
     },
     
     {
+        remove: function() {},
         "title":"Rock N Roll",
         "_id":"50a299213eb878714d000002",
         "__v":0,
@@ -101,6 +105,7 @@ var samplePlaylists = [
     },
     
     {
+        remove: function() {},
         "title":"Dubstep",
         "_id":"50a2882e6e32619d70000008",
         "__v":0,
@@ -111,6 +116,7 @@ var samplePlaylists = [
     },
     
     {
+        remove: function() {},
         "title":"Rap",
         "_id":"50a29a7a3eb878714d000003",
         "__v":0,
@@ -121,6 +127,7 @@ var samplePlaylists = [
     },
     
     {
+        remove: function() {},
         "title":"F",
         "owner":"50a3d21fbf625a2560000002",
         "_id":"50a3ecff9274e7b52f000002",
@@ -131,6 +138,7 @@ var samplePlaylists = [
     },
     
     {
+        remove: function() {},
         "__v":3,
         "_id":"509a9b11966a398a4a000002",
         "owner":"50a3d21fbf625a2560000002",
@@ -168,6 +176,7 @@ var samplePlaylists = [
     },
     
     {
+        remove: function() {},
         "__v":4,
         "_id":"50a5b70fe995d6860a000006",
         "owner":"50a3d21fbf625a2560000002",
@@ -214,6 +223,7 @@ var samplePlaylists = [
     },
         
     {
+        remove: function() {},
         "__v":5,
         "_id":"50a53afd4705dd657a000002",
         "owner":"50a3d21fbf625a2560000002",
@@ -269,7 +279,7 @@ var samplePlaylists = [
     }
 ];
 
-var sampleYouTubeAPISongEntry = {
+var sampleYouTubeAPISongEntryOLD = {
     "title":"[Mic Test] Aa-apples...",
     "viewCount":"27",
     "videoId":"GSQUA9HPtrw",
@@ -277,3 +287,19 @@ var sampleYouTubeAPISongEntry = {
     "thumbUrl":"http://i.ytimg.com/vi/GSQUA9HPtrw/3.jpg",
     "duration":"91"
 };
+
+var sampleYouTubeAPISongEntry = {"kind": "youtube#searchResult", "etag": "\"o_JQzz84t1xSQq_sjCJ9nGgwL_w/VHDMhgmMSb3zPFE-fOTxK9bij0s\"", "id": {"kind": "youtube#video", "videoId": "4vTyEy7Dn70"}, "snippet": {"publishedAt": "2013-07-22T23:14:58.000Z", "channelId": "UCpko_-a4wgz2u_DgDgd9fqA", "title": "Optical Illusion Test: Are You Easily Fooled?", "description": "Share on Facebook: http://on.fb.me/160rMQ5 Share on Twitter: http://bit.ly/160rSaB Mond-vergleich/wikimedia commons http://en.wikipedia.org/wiki/File:Mond-ve ...", "thumbnails": {"default": {"url": "https://i.ytimg.com/vi/4vTyEy7Dn70/default.jpg"}, "medium": {"url": "https://i.ytimg.com/vi/4vTyEy7Dn70/mqdefault.jpg"}, "high": {"url": "https://i.ytimg.com/vi/4vTyEy7Dn70/hqdefault.jpg"}}, "channelTitle": "BuzzFeedVideo", "liveBroadcastContent": "none"}}
+
+
+var test = {"kind": "youtube#searchListResponse", "etag": "\"o_JQzz84t1xSQq_sjCJ9nGgwL_w/qGJoGHYtspeC91z33HUzmJapFoQ\"", "nextPageToken": "CAoQAA", "pageInfo": {"totalResults": 1000000, "resultsPerPage": 10}, "items": [
+    {"kind": "youtube#searchResult", "etag": "\"o_JQzz84t1xSQq_sjCJ9nGgwL_w/VHDMhgmMSb3zPFE-fOTxK9bij0s\"", "id": {"kind": "youtube#video", "videoId": "4vTyEy7Dn70"}, "snippet": {"publishedAt": "2013-07-22T23:14:58.000Z", "channelId": "UCpko_-a4wgz2u_DgDgd9fqA", "title": "Optical Illusion Test: Are You Easily Fooled?", "description": "Share on Facebook: http://on.fb.me/160rMQ5 Share on Twitter: http://bit.ly/160rSaB Mond-vergleich/wikimedia commons http://en.wikipedia.org/wiki/File:Mond-ve ...", "thumbnails": {"default": {"url": "https://i.ytimg.com/vi/4vTyEy7Dn70/default.jpg"}, "medium": {"url": "https://i.ytimg.com/vi/4vTyEy7Dn70/mqdefault.jpg"}, "high": {"url": "https://i.ytimg.com/vi/4vTyEy7Dn70/hqdefault.jpg"}}, "channelTitle": "BuzzFeedVideo", "liveBroadcastContent": "none"}},
+    {"kind": "youtube#searchResult", "etag": "\"o_JQzz84t1xSQq_sjCJ9nGgwL_w/JT9dGqm0ppZa7f6isfbP1VcjlKw\"", "id": {"kind": "youtube#video", "videoId": "ikbEBp5BeCM"}, "snippet": {"publishedAt": "2012-06-24T10:35:24.000Z", "channelId": "UCvGMGQC8gNkd4gwxSbABIlw", "title": "THE TEST", "description": "https://twitter.com/#!/RichardWiseman.", "thumbnails": {"default": {"url": "https://i.ytimg.com/vi/ikbEBp5BeCM/default.jpg"}, "medium": {"url": "https://i.ytimg.com/vi/ikbEBp5BeCM/mqdefault.jpg"}, "high": {"url": "https://i.ytimg.com/vi/ikbEBp5BeCM/hqdefault.jpg"}}, "channelTitle": "Quirkology", "liveBroadcastContent": "none"}},
+    {"kind": "youtube#searchResult", "etag": "\"o_JQzz84t1xSQq_sjCJ9nGgwL_w/7oxxozG_5un4dioAm7ti1MbKx5Y\"", "id": {"kind": "youtube#video", "videoId": "gSdQyVNUvTc"}, "snippet": {"publishedAt": "2013-03-05T11:31:11.000Z", "channelId": "UCsAegdhiYLEoaFGuJFVrqFQ", "title": "Crash Testing the 2013 Volvo XC60! - The Downshift Episode 51", "description": "We visit Ruckersville, VA and the Insurance Institute for Highway Safety's Vehicle Research Center. IIHS is crash testing the 2013 Volvo XC60 in one of their...", "thumbnails": {"default": {"url": "https://i.ytimg.com/vi/gSdQyVNUvTc/default.jpg"}, "medium": {"url": "https://i.ytimg.com/vi/gSdQyVNUvTc/mqdefault.jpg"}, "high": {"url": "https://i.ytimg.com/vi/gSdQyVNUvTc/hqdefault.jpg"}}, "channelTitle": "MotorTrend", "liveBroadcastContent": "none"}},
+    {"kind": "youtube#searchResult", "etag": "\"o_JQzz84t1xSQq_sjCJ9nGgwL_w/a_FyKfDFwpmAERwVAMRHH2Cr-2I\"", "id": {"kind": "youtube#video", "videoId": "e0TuG9bMEeY"}, "snippet": {"publishedAt": "2013-03-06T20:23:32.000Z", "channelId": "UCG7FhiCr5N0Srzlnn3lJubg", "title": "Test de inteligencia en tres preguntas", "description": "Mida su coeficiente intelectual, que tal inteligente se considera descubralo por medio de este sencillo test. Si quieren saber mas sobre el coeficiente intel...", "thumbnails": {"default": {"url": "https://i.ytimg.com/vi/e0TuG9bMEeY/default.jpg"}, "medium": {"url": "https://i.ytimg.com/vi/e0TuG9bMEeY/mqdefault.jpg"}, "high": {"url": "https://i.ytimg.com/vi/e0TuG9bMEeY/hqdefault.jpg"}}, "channelTitle": "spicus99", "liveBroadcastContent": "none"}},
+    {"kind": "youtube#searchResult", "etag": "\"o_JQzz84t1xSQq_sjCJ9nGgwL_w/7DzMC4MKRhzEuelBcmWGGiwL6h4\"", "id": {"kind": "youtube#video", "videoId": "ym_c0gVMMHc"}, "snippet": {"publishedAt": "2013-05-25T02:01:34.000Z", "channelId": "UCVpankR4HtoAVtYnFDUieYA", "title": "Human Test Volume 3 :: Love & Loss", "description": "If you answer yes to 10 or more of these you are a human. if not more tests are needed. music: http://soundcloud.com/brenticus Film Footage courtesy of Shutt...", "thumbnails": {"default": {"url": "https://i.ytimg.com/vi/ym_c0gVMMHc/default.jpg"}, "medium": {"url": "https://i.ytimg.com/vi/ym_c0gVMMHc/mqdefault.jpg"}, "high": {"url": "https://i.ytimg.com/vi/ym_c0gVMMHc/hqdefault.jpg"}}, "channelTitle": "zefrank1", "liveBroadcastContent": "none"}},
+    {"kind": "youtube#searchResult", "etag": "\"o_JQzz84t1xSQq_sjCJ9nGgwL_w/F72CtUDBFNQnDG6sDFDPmAA13Z8\"", "id": {"kind": "youtube#video", "videoId": "QX_oy9614HQ"}, "snippet": {"publishedAt": "2009-09-24T21:12:19.000Z", "channelId": "UCsHof0eB6MLRm0tHmpW7ILg", "title": "The Marshmallow Test", "description": "Downloads and DVDs are available at http://www.ignitermedia.com. In this popular test, several kids wrestle with waiting to eat a marshmallow in hopes of a b...", "thumbnails": {"default": {"url": "https://i.ytimg.com/vi/QX_oy9614HQ/default.jpg"}, "medium": {"url": "https://i.ytimg.com/vi/QX_oy9614HQ/mqdefault.jpg"}, "high": {"url": "https://i.ytimg.com/vi/QX_oy9614HQ/hqdefault.jpg"}}, "channelTitle": "IgniterMedia", "liveBroadcastContent": "none"}},
+    {"kind": "youtube#searchResult", "etag": "\"o_JQzz84t1xSQq_sjCJ9nGgwL_w/ys1YYd4rahNz6zR9inaV1JimuRk\"", "id": {"kind": "youtube#video", "videoId": "yc86ZXFsriM"}, "snippet": {"publishedAt": "2009-10-13T15:54:46.000Z", "channelId": "UCPDXXXJj9nax0fr0Wfc048g", "title": "Retarded Tests", "description": "If you don't watch this video, you're retarded. See our videos a month earlier at http://www.collegehumor.com and follow us on http://www.twitter.com/college...", "thumbnails": {"default": {"url": "https://i.ytimg.com/vi/yc86ZXFsriM/default.jpg"}, "medium": {"url": "https://i.ytimg.com/vi/yc86ZXFsriM/mqdefault.jpg"}, "high": {"url": "https://i.ytimg.com/vi/yc86ZXFsriM/hqdefault.jpg"}}, "channelTitle": "collegehumor", "liveBroadcastContent": "none"}},
+    {"kind": "youtube#searchResult", "etag": "\"o_JQzz84t1xSQq_sjCJ9nGgwL_w/MdsPO9G7m0mimvwdY5A5djbmAns\"", "id": {"kind": "youtube#video", "videoId": "BLZAlp0if3M"}, "snippet": {"publishedAt": "2010-06-05T14:46:40.000Z", "channelId": "UCkDFyzIoAKSg3MBVKwqnPHA", "title": "Personality Test!", "description": "Music 'Chee Zee Beach' Kevin MacLeod (www.incompetech.com) Licensed under Creative Commons \"Attribution 3.0\" ...", "thumbnails": {"default": {"url": "https://i.ytimg.com/vi/BLZAlp0if3M/default.jpg"}, "medium": {"url": "https://i.ytimg.com/vi/BLZAlp0if3M/mqdefault.jpg"}, "high": {"url": "https://i.ytimg.com/vi/BLZAlp0if3M/hqdefault.jpg"}}, "channelTitle": "twish1999", "liveBroadcastContent": "none"}},
+    {"kind": "youtube#searchResult", "etag": "\"o_JQzz84t1xSQq_sjCJ9nGgwL_w/k_ci8YhtpMV1zFbyrhjjPFYK7aA\"", "id": {"kind": "youtube#video", "videoId": "yrAhGfrxaUo"}, "snippet": {"publishedAt": "2013-05-20T19:13:45.000Z", "channelId": "UCay_OLhWtf9iklq8zg_or0g", "title": "The Body-Brain Test", "description": "Know more about your body in less than 2 minutes Music - Do Your Sound by Db http://soundcloud.com/dbspot/do-your-sound.", "thumbnails": {"default": {"url": "https://i.ytimg.com/vi/yrAhGfrxaUo/default.jpg"}, "medium": {"url": "https://i.ytimg.com/vi/yrAhGfrxaUo/mqdefault.jpg"}, "high": {"url": "https://i.ytimg.com/vi/yrAhGfrxaUo/hqdefault.jpg"}}, "channelTitle": "BuzzFeedYellow", "liveBroadcastContent": "none"}},
+    {"kind": "youtube#searchResult", "etag": "\"o_JQzz84t1xSQq_sjCJ9nGgwL_w/sRQz7dGzRGTEO3ZfBHTM-67Jcp4\"", "id": {"kind": "youtube#video", "videoId": "VxcbppCX6Rk"}, "snippet": {"publishedAt": "2013-08-13T14:00:19.000Z", "channelId": "UCC552Sd-3nyi_tk2BudLUzA", "title": "How Old Are Your Ears? (Hearing Test)", "description": "MUST WATCH IN 1080p AND USE HEADPHONES* How high can you hear? Take this 'test' to see how old your ears are! SUBSCRIBE (it's free!)", "thumbnails": {"default": {"url": "https://i.ytimg.com/vi/VxcbppCX6Rk/default.jpg"}, "medium": {"url": "https://i.ytimg.com/vi/VxcbppCX6Rk/mqdefault.jpg"}, "high": {"url": "https://i.ytimg.com/vi/VxcbppCX6Rk/hqdefault.jpg"}}, "channelTitle": "AsapSCIENCE", "liveBroadcastContent": "none"}}
+]}

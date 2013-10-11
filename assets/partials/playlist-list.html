@@ -2,21 +2,30 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Playlists</th>            
+                <th>Playlists</th>
+                <th>&nbsp;</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="playlist in playlists | filter:query">
-                <td><a href="#/playlists/{{playlist.id}}" ng-click="changePlaylist($index)">{{playlist.title}}</a></td>
+            <tr ng-repeat="playlist in playlists | filter:query" ng-mouseenter="showRemovePlaylistButton = $index" ng-mouseleave="showRemovePlaylistButton = -1">
+                <td>
+
+                    <a href="#/playlists/{{playlist.id}}" ng-click="changePlaylist($index)">{{playlist.title}}</a>
+                </td>
+                <td width="48px">
+                    <button class="btn btn-xs btn-danger" ng-show="showRemovePlaylistButton == $index" ng-click="deletePlaylist(playlist)">
+                        <i class="glyphicon glyphicon-remove"></i>
+                    </button>
+                </td>
             </tr>
         </tbody>
         <tfoot>
             <tr>
-                <td>{{playlists.length}} playlists.</td>
+                <td colspan="2">{{playlists.length}} playlists.</td>
             </tr>
             <tr>
                 <!-- filter playlists -->
-                <td><input ng-model="query" placeholder="filter playlists..."></td> 
+                <td colspan="2"><input ng-model="query" placeholder="filter playlists..."></td>
             </tr>
         </tfoot>
     </table>

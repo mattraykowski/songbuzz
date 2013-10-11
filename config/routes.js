@@ -46,7 +46,7 @@ module.exports.routes = {
   // The Playlist Controller
   'get /playlist/:id': {
     controller: 'playlist',
-    action: 'find',
+    action: 'find'
   },
   'post /playlist': {
     controller: 'playlist',
@@ -58,7 +58,7 @@ module.exports.routes = {
   },
   'delete /playlist/:id': {
     controller: 'playlist',
-    action: 'update'
+    action: 'destroy'
   },
   'get /playlist': {
     controller: 'playlist',

@@ -27,7 +27,7 @@ songbuzzApp.directive('ytSelect', function () {
                     },
                     results: function (data, page) {
                         console.log("LOGGING THE RESULTS DATA");
-                        console.log(data);
+                        console.log("dataL "+JSON.stringify(data));
                         console.log(page);
                         var more = (page * 10) < data.total;
                         return { results: data.items, more: more };
@@ -50,6 +50,9 @@ songbuzzApp.directive('ytSelect', function () {
 
             element.on("select2-selecting", function (e) {
                 scope.ytSelectSelected = true;
+                console.log("START ytSelected Song");
+                console.log(JSON.stringify(e.object));
+                console.log("END ytSelected Song");
                 scope.ytSelectVideo = e.object;
                 scope.$apply();
             });
