@@ -1,6 +1,6 @@
 'use strict';
 
-songbuzzApp.controller('PlaylistDetailCtrl', ['$rootScope',
+songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
     '$scope',
     '$timeout',
     '$routeParams',

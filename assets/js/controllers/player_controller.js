@@ -1,6 +1,6 @@
 'use strict';
 
-songbuzzApp.controller('PlayerCtrl', ['$scope', '$timeout', 'PlayerService',
+songbuzzApp.controller('PlayerController', ['$scope', '$timeout', 'PlayerService',
 
     function ($scope, $timeout, PlayerService) {
         $scope.playerService = PlayerService; // save a reference for expressions and children

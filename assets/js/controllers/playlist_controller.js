@@ -1,6 +1,6 @@
 'use strict';
 
-songbuzzApp.controller('PlaylistListCtrl', ['$scope', '$timeout', 'PlayerService', 'Restangular',
+songbuzzApp.controller('PlaylistListController', ['$scope', '$timeout', 'PlayerService', 'Restangular',
     function ($scope, $timeout, PlayerService, Restangular) {
         $scope.playlists = [];
         $scope.playlistService = Restangular.all('playlist');
@@ -16,13 +16,10 @@ songbuzzApp.controller('PlaylistListCtrl', ['$scope', '$timeout', 'PlayerService
         $scope.addNewPlaylist = function () {
             $scope.playlistService.post({ title: $scope.playlistTitle})
                 .then(function(response) {
-                    console.log("HEEELLLPPP");
                     $scope.updatePlaylists();
                 }, function() {
                     console.log("There was an error adding a new playlist.");
                 });
-
-            //$timeout($scope.updatePlaylists, 250);
         };
 
         $scope.deletePlaylist = function (playlist) {

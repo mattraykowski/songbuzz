@@ -11,7 +11,7 @@ describe("PlaylistListController", function() {
         httpBackend = _$httpBackend_;
         httpBackend.expectGET("/playlist").respond(samplePlaylists);
 
-		playlistListCtrl = $controller('PlaylistListCtrl', {
+		playlistListCtrl = $controller('PlaylistListController', {
 			$scope: scope,
 			$timeout: _$timeout_,
 			PlayerService: PlayerServiceMock,

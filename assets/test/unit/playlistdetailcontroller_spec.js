@@ -8,7 +8,7 @@ describe("PlaylistDetailController", function () {
         scope = _$rootScope_.$new();
         $controller = _$controller_;
 
-        playlistDetailCtrl = $controller('PlaylistDetailCtrl', {
+        playlistDetailCtrl = $controller('PlaylistDetailController', {
             $scope: scope,
             $timeout: _$timeout_,
             $routeParams: _$routeParams_,

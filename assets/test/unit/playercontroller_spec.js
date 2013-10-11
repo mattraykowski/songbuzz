@@ -8,7 +8,7 @@ describe("PlayerController", function() {
 		scope = _$rootScope_.$new();
 		$controller = _$controller_;
 
-		playerCtrl = $controller('PlayerCtrl', {
+		playerCtrl = $controller('PlayerController', {
 			$rootScope: _$rootScope_,
 			$scope: scope,
 			$timeout: _$timeout_,
