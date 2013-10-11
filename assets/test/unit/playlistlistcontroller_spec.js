@@ -45,15 +45,24 @@ describe("PlaylistListController", function() {
 
     describe("deletePlaylist", function() {
         it("remove the playlist via REST", inject(function($rootScope, $timeout) {
+            // Restangular fires a get each time the base object is accessed
+            httpBackend.expectGET("/playlist").respond(samplePlaylists);
+
+            // Mock up the sample playlists and select one to delete.
             scope.playlists = samplePlaylists;
             toDeletePlaylist = samplePlaylists[0];
-            spyOn(toDeletePlaylist, 'remove');
+
+            // Catch the call to Restangular remove.
+            spyOn(toDeletePlaylist, 'remove').andReturn({ then: function(cb) { cb(); } });
+            // Spy on the updatePlaylists method - the callback should request an update.
+            spyOn(scope, 'updatePlaylists');
 
             scope.deletePlaylist(toDeletePlaylist);
             rootScope.$digest();
 
-            // TODO: fix this expectation. It should match but does not, even though the code works.
-            //expect(scope.playlists[0].remove).toHaveBeenCalled();
+            // fix this expectation. It should match but does not, even though the code works.
+            expect(toDeletePlaylist.remove).toHaveBeenCalled();
+            expect(scope.updatePlaylists).toHaveBeenCalled();
         }));
     });
 
