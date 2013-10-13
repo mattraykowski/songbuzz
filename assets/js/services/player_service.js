@@ -94,13 +94,10 @@ songbuzzApp.factory('PlayerService', function ($rootScope) {
         playNext: function () {
             this.currentSongIndex++;
             if (this.currentSongIndex < this.playingPlaylist.songs.length) {
-                console.log("playing next");
                 this.playCurrentIndex();
             } else {
-                console.log("end of playlist");
                 this.currentSongIndex = 0;
                 if (this.ytPlayer.getPlayerState() != this.PlayerState.ENDED) {
-                    console.log("stopping player");
                     this.stop();
                 }
                 $rootScope.$broadcast('plrPlaylistEnded');
@@ -109,6 +106,18 @@ songbuzzApp.factory('PlayerService', function ($rootScope) {
 
         // Updates the song index and plays the previous next song.
         playPrevious: function () {
+            this.currentSongIndex--;
+            if (this.currentSongIndex >= 0) {
+                this.playCurrentIndex();
+            } else {
+                this.currentSongIndex = 0;
+                if(this.ytPlayer.getPlayerState() == this.PlayerState.PLAYING) {
+                    this.playCurrentIndex();
+                } else {
+                    this.stop();
+                }
+            }
+
 
         },
 
@@ -128,7 +137,6 @@ songbuzzApp.factory('PlayerService', function ($rootScope) {
         },
 
         changePlaylist: function (playlist) {
-            console.log(playlist);
             this.currentPlaylist = playlist;
             // fix up in case songs aren't on there.
             if (this.currentPlaylist.songs == undefined) {
@@ -148,7 +156,6 @@ songbuzzApp.factory('PlayerService', function ($rootScope) {
 
         getPlayerCurrentTime: function () {
             if (this.ytPlayer.getCurrentTime == undefined) {
-                console.log("ytPlayer is messed up");
                 return 0;
             }
             return this.ytPlayer.getCurrentTime();

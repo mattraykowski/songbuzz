@@ -52,6 +52,7 @@
 
 
 var samplePlaylists = [
+    // Has only one song.
     {
         remove: function() {},
         "__v":5,
@@ -77,7 +78,6 @@ var samplePlaylists = [
         "_id":"50a29a963eb878714d000005",
         "__v":0,
         "owner":"50a3d21fbf625a2560000002",
-        "songs":[],
         "selected":false,
         "$$hashKey":"00A"
     },

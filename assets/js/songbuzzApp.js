@@ -25,7 +25,11 @@ songbuzzApp.config(['$routeProvider', '$locationProvider', 'RestangularProvider'
 // Broadcast the YouTube event to the PlayerService.
 window.onYouTubeIframeAPIReady = function() {
     var scope = angular.element(document).scope();
-    scope.$broadcast('ytPlayerAPIReady');
+    if(scope == undefined) {
+        console.log("Angular wasn't ready in time for YouTube.");
+    } else {
+        scope.$broadcast('ytPlayerAPIReady');
+    }
 }
 
 var tag = document.createElement('script');
