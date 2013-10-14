@@ -1,7 +1,8 @@
 /**
  * Playlist
  *
- * @module      :: Model
+ * @module Playlist
+ * @extends Model
  * @description :: A short summary of how this model works and what it represents.
  *
  */

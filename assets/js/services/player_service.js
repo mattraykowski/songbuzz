@@ -44,16 +44,32 @@ songbuzzApp.factory('PlayerService', function ($rootScope) {
 
         // PLAYER STATE MANAGEMENT
 
+        /**
+         * Initializes the YouTube PlayerService
+         *
+         * It declares a function whose purpose is to announce to Angular that the
+         * player API is fully loaded. This is different from the 'ytPlayerAPIReady'
+         * event that is emitted globally, which denotes that the YouTube API script
+         * has fully loaded (and is usable.) That event gets caught by PlayerControler
+         * which in turn calls this initialize method to build the actual YT Player.
+         *
+         * When the player is fully loaded it will emit a 'ytPlayerLoaded' event.
+         *
+         */
         init: function () {
             var plrFn = function () {
                 $rootScope.$broadcast('ytPlayerLoaded');
             };
 
             this.ytPlayer = new YT.Player('player', {
-                height: '360',
-                width: '480',
-                videoId: 'Ys9sIqv42lo',
-                autohide: 0,
+                height: '200',
+                width: '200',
+                videoId: 'vmnWJBRrVYo',
+                playerVars: {
+                    //autohide: 1,
+                    controls: 0,
+                    showinfo: 0
+                },
                 events: {
                     'onReady': plrFn,
                     'onStateChange': this.setPlayerStateChange
@@ -61,6 +77,15 @@ songbuzzApp.factory('PlayerService', function ($rootScope) {
             });
         },
 
+        /**
+         * This function is used by the YouTube Player to send player state
+         * and other event changes into the Angular application. Because the
+         * player exists outside of the Angular application this must use Angular
+         * injection to insert the event data into PlayerService. Then it emits
+         * a 'ytPlayerStateChanged' event so that all controllers and services
+         * may act on the state change, if necessary.
+         * @param event {Object} YouTube API Event
+         */
         setPlayerStateChange: function (event) {
             // This code is actually served up by the YT API, we need the actual service.
             var injector = angular.element(document).injector();
@@ -71,26 +96,26 @@ songbuzzApp.factory('PlayerService', function ($rootScope) {
 
         // PLAYER VCR CONTROLS
 
-        // This function makes the YT API play a new video ID.
+        /** Tells the YT player to cue the current song and then play it. */
         play: function () {
-            console.log(this.currentSong.videoId);
             this.ytPlayer.cueVideoById(this.currentSong.videoId);
             this.ytPlayer.playVideo();
         },
 
-        // This is used to play a song and switch playlists.
+        /** Switches the current song index and playing playlist and then plays that index/playlist */
         playIndex: function (songIndex) {
             this.currentSongIndex = songIndex;
             this.playingPlaylist = this.currentPlaylist;
             this.playCurrentIndex();
         },
 
+        /** Using the current song index, pull the song to play up from the playlist and then play it. */
         playCurrentIndex: function () {
             this.currentSong = this.playingPlaylist.songs[this.currentSongIndex];
             this.play();
         },
 
-        // Updates the song index and plays the next song.
+        /** Updates the song index and plays the next song. */
         playNext: function () {
             this.currentSongIndex++;
             if (this.currentSongIndex < this.playingPlaylist.songs.length) {
@@ -104,7 +129,7 @@ songbuzzApp.factory('PlayerService', function ($rootScope) {
             }
         },
 
-        // Updates the song index and plays the previous next song.
+        /** Updates the song index and plays the previous next song. */
         playPrevious: function () {
             this.currentSongIndex--;
             if (this.currentSongIndex >= 0) {
@@ -121,21 +146,27 @@ songbuzzApp.factory('PlayerService', function ($rootScope) {
 
         },
 
-        // This function makes the YT API stop the video playback.
+        /** This function makes the YT API stop the video playback. */
         stop: function () {
             this.ytPlayer.stopVideo();
         },
 
-        // This function makes the YT API pause the video playback.
+        /** This function makes the YT API pause the video playback. */
         pause: function () {
             this.ytPlayer.pauseVideo();
         },
 
-        // This function makes the YT API pause the video playback.
+        /** This function makes the YT API pause the video playback. */
         unpause: function () {
             this.ytPlayer.playVideo();
         },
 
+        /**
+         * Changes the current playlist, initializes the song array (if necessary) and
+         * emits a 'changePlaylist' event.
+         *
+         * @param playlist {Object} A playlist object.
+         */
         changePlaylist: function (playlist) {
             this.currentPlaylist = playlist;
             // fix up in case songs aren't on there.
@@ -147,6 +178,11 @@ songbuzzApp.factory('PlayerService', function ($rootScope) {
 
         // Misc. Player Utilities
 
+        /**
+         * Retrieves the current song duration.
+         *
+         * @return {number} the current song duration or 0 if uninitialized.
+         */
         getPlayerDuration: function () {
             if (this.ytPlayer.getDuration == undefined) {
                 return 0;
@@ -154,6 +190,11 @@ songbuzzApp.factory('PlayerService', function ($rootScope) {
             return this.ytPlayer.getDuration();
         },
 
+        /**
+         * Retrieves the current song time position.
+         *
+         * @returns {number} the current song position or 0 if unitialized.
+         */
         getPlayerCurrentTime: function () {
             if (this.ytPlayer.getCurrentTime == undefined) {
                 return 0;
