@@ -17,7 +17,6 @@ describe("PlayerService", function() {
         PlayerService.ytPlayer = {
             cueVideoById: function(a) {},
             playVideo: function() {},
-            getPlayerState: function() {},
             stopVideo: function() {},
             pauseVideo: function() {},
             getPlayerState: function() {},

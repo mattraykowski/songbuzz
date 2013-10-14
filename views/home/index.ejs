@@ -1,48 +1,58 @@
 <div>
     <div class="row">
-        <div class="col-md-10 col-xs-12" ng-controller="PlayerController">
-            <div class="well">
-                <div class=" "
-                     ng-class="{'progress':true, 'progress-striped':(playState||pauseState), 'active':playState}">
-                    <div class="progress-bar progress-bar-info "
-                         ng-click="progressBarClick($event)"
-                         style="{{ 'width: ' + progress + '%'}}">
-                    </div>
-                </div>
-                <div id="playingDescr">
-                    Now Playing: {{ getSongTitle() }} :: {{ friendlyDuration(getCurrentDuration()) }}
-                </div>
+        <div class="col-md-7 col-xs-12" ng-controller="PlayerController">
+            <div class="text-center">
                 <div class="btn-group">
-                    <button class="btn btn-xs"
+                    <button class="btn btn-default btn-sm"
                             ng-click="playPreviousButton()">
-                        <i  class="glyphicon glyphicon-step-backward"></i>
+                        <i class="glyphicon glyphicon-step-backward"></i>
                     </button>
                     <button id="player-pause-btn"
-                            ng-class="{'btn':true, 'btn-xs':true, 'active':pauseState}"
+                            ng-class="{'btn':true, 'btn-sm':true, 'btn-default':true, 'active':pauseState}"
                             ng-click="pauseButton()">
                         <i class="glyphicon glyphicon-pause"></i>
                     </button>
                     <button id="player-stop-btn"
-                            class="btn btn-xs"
+                            class="btn btn-default btn-sm"
                             ng-click="stopButton()">
                         <i class="glyphicon glyphicon-stop"></i>
                     </button>
                     <button id="player-play-btn"
-                            ng-class="{'btn':true, 'btn-xs':true, 'active':playState}"
+                            ng-class="{'btn':true, 'btn-sm':true, 'btn-default':true, 'active':playState}"
                             ng-click="playButton()">
                         <i class="glyphicon glyphicon-play"></i>
                     </button>
-                    <button class="btn btn-xs"
+                    <button class="btn btn-default btn-sm"
                             ng-click="playNextButton()">
                         <i class="glyphicon glyphicon-step-forward"></i>
                     </button>
-                    <button class="btn btn-xs"
-                            ng-click="toggleVisible()">
-                        <i class="glyphicon glyphicon-facetime-video"></i>
-                    </button>
+                    <!--<button class="btn btn-xs"-->
+                    <!--ng-click="toggleVisible()">-->
+                    <!--<i class="glyphicon glyphicon-facetime-video"></i>-->
+                    <!--</button>-->
                 </div>
-                <player-view/>
             </div>
+            <div class=" "
+                 ng-class="{'progress':true, 'progress-striped':(playState||pauseState), 'active':playState}">
+                <div class="progress-bar progress-bar-info "
+                     ng-click="progressBarClick($event)"
+                     style="{{ 'width: ' + progress + '%'}}">
+                </div>
+            </div>
+            <div id="playingDescr">
+                Now Playing: {{ getSongTitle() }} :: {{ friendlyDuration(getCurrentDuration()) }}
+            </div>
+
+
+            <!--</div>-->
+        </div>
+        <div class="col-xs-12 col-md-3">
+            <!--<div class="well">-->
+            <!--<player-view/>-->
+            <div class="text-center">
+                    <div id="player"></div>
+            </div>
+            <!--</div>-->
         </div>
         <div class="col-xs-12 col-md-2">
             <div class="well well-large">

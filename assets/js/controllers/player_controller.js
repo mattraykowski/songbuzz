@@ -4,7 +4,6 @@ songbuzzApp.controller('PlayerController', ['$scope', '$timeout', 'PlayerService
 
     function ($scope, $timeout, PlayerService) {
         $scope.playerService = PlayerService; // save a reference for expressions and children
-        $scope.playerVisible = false;
         $scope.playerStateMsg = PlayerService.PlayerState.stateToString(PlayerService.currentPlayerState);
 
         // Button states.
@@ -28,6 +27,10 @@ songbuzzApp.controller('PlayerController', ['$scope', '$timeout', 'PlayerService
             }
         };
 
+        /**
+         * Asks the PlayerService to unpause if the YouTube player is paused, otherwise asks
+         * the PlayerService to play.
+         */
         $scope.playButton = function () {
             if (PlayerService.currentPlayerState == PlayerService.PlayerState.PAUSED) {
                 // Unpause the song if one is already playing but paused.
@@ -37,18 +40,25 @@ songbuzzApp.controller('PlayerController', ['$scope', '$timeout', 'PlayerService
             }
         };
 
+        /** Asks the PlayerService to play the previous song in the playlist. */
         $scope.playPreviousButton = function () {
-
+            PlayerService.playPrevious();
         }
 
+        /** Asks the PlayerService to play the next song in the playlist. */
         $scope.playNextButton = function () {
             PlayerService.playNext();
         }
 
+        /** Asks the PlayerService to stop playback. */
         $scope.stopButton = function () {
             PlayerService.stop();
         };
 
+        /**
+         * Asks the PlayerService to unpause if the YouTube player is paused, otherwise asks
+         * the PlayerService to pause.
+         */
         $scope.pauseButton = function () {
             if (PlayerService.currentPlayerState == PlayerService.PlayerState.PAUSED) {
                 // Unpause the song.
@@ -56,17 +66,6 @@ songbuzzApp.controller('PlayerController', ['$scope', '$timeout', 'PlayerService
             } else {
                 PlayerService.pause();
             }
-        }
-
-        $scope.toggleVisible = function () {
-            if ($scope.playerVisible === true) {
-                $scope.playerVisible = false;
-            }
-            else if ($scope.playerVisible === false) {
-                $scope.playerVisible = true;
-            }
-
-            $scope.$broadcast('playerVisibilityChanged');
         };
 
         $scope.getSongTitle = function () {
@@ -75,12 +74,20 @@ songbuzzApp.controller('PlayerController', ['$scope', '$timeout', 'PlayerService
                 songTitle = "none";
             }
             return songTitle;
-        }
+        };
 
+        /**
+         * Retrieves the current song duration.
+         * @returns {number} the current song duration.
+         */
         $scope.getTotalDuration = function () {
             return PlayerService.getPlayerDuration();
         }
 
+        /**
+         * Retrieves the current song position.
+         * @returns {number} the current song position.
+         */
         $scope.getCurrentDuration = function () {
             return PlayerService.getPlayerCurrentTime();
         }

@@ -7,18 +7,18 @@ var PlayerServiceMock = {
     playingPlaylist: {},
     currentSongIndex: 0,
     currentSong: {},
-    
+
     ytPlayer: {
         // Return 400 seconds.
         getDuration: function() {
             return 400;
         },
-        
+
         cueVideoById: function(videoId) { },
-        
+
         playVideo: function() { }
     },
-    
+
     PlayerState: {
         UNSTARTED: -1,
         ENDED: 0,
@@ -26,12 +26,12 @@ var PlayerServiceMock = {
         PAUSED: 2,
         BUFFERING: 3,
         CUED: 5,
-            
+
         stateToString: function(state) { return ''; }
     },
-    
+
     init: function() {},
-    
+
     playNext: function() {},
 
     changePlaylist: function(playlist) {
@@ -44,7 +44,9 @@ var PlayerServiceMock = {
         this.playingPlaylist = this.currentPlaylist;
         //$rootScope.$broadcast('requestSongChange');
     },
-
+    getPlayerDuration: function() {},
+    getPlayerCurrentTime: function() {},
+    unpause: function() {}
 };
 
 var PlaylistServiceMock = {
