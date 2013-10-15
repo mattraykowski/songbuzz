@@ -21,7 +21,8 @@ describe("PlayerService", function() {
             pauseVideo: function() {},
             getPlayerState: function() {},
             getDuration: function() {},
-            getCurrentTime: function() {}
+            getCurrentTime: function() {},
+            seekTo: function(time_position) {}
         };
     }));
 
@@ -231,6 +232,15 @@ describe("PlayerService", function() {
                 expect(PlayerService.ytPlayer.playVideo).toHaveBeenCalled();
             });
         });
+
+        describe("seekTime", function() {
+            it("should call the YouTube API to seek to a time position", function() {
+                spyOn(PlayerService.ytPlayer, 'seekTo');
+
+                PlayerService.seekTime(100);
+                expect(PlayerService.ytPlayer.seekTo).toHaveBeenCalledWith(100);
+            })
+        })
     });
 
     describe("player utilities", function() {

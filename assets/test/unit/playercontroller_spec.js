@@ -238,5 +238,25 @@ describe("PlayerController", function() {
             });
         });
 
-    })
+    });
+
+    describe("progress bar", function() {
+        describe("progressBarClick", function() {
+            it("should update the progress based on the click position on the bar", function() {
+                spyOn(PlayerService, 'seekTime');
+                spyOn(PlayerService, 'getPlayerDuration').andReturn(1000);
+
+                var ev = {
+                    offsetX: 10,
+                    currentTarget: {
+                        clientWidth: 100
+                    }
+                };
+
+                var seekTo = (ev.offsetX/ev.currentTarget.clientWidth)*1000;
+                scope.progressBarClick(ev);
+                expect(PlayerService.seekTime).toHaveBeenCalledWith(seekTo);
+            });
+        });
+    });
 });

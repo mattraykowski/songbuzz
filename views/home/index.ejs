@@ -32,7 +32,7 @@
                     <!--</button>-->
                 </div>
             </div>
-            <div class=" "
+            <div ng-click="progressBarClick($event)" class=" "
                  ng-class="{'progress':true, 'progress-striped':(playState||pauseState), 'active':playState}">
                 <div class="progress-bar progress-bar-info "
                      ng-click="progressBarClick($event)"

@@ -162,6 +162,14 @@ songbuzzApp.factory('PlayerService', function ($rootScope) {
         },
 
         /**
+         * This passes the requested time position in to the YouTube Player
+         * @param time_position {number} time in seconds to seek to.
+         */
+        seekTime: function(time_position) {
+            this.ytPlayer.seekTo(time_position);
+        },
+
+        /**
          * Changes the current playlist, initializes the song array (if necessary) and
          * emits a 'changePlaylist' event.
          *

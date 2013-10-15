@@ -2,6 +2,14 @@
 
 songbuzzApp.controller('PlayerController', ['$scope', '$timeout', 'PlayerService',
 
+    /** @constructor
+     *
+     * This is the PlayerController.
+     *
+     * @param $scope
+     * @param $timeout
+     * @param PlayerService
+     */
     function ($scope, $timeout, PlayerService) {
         $scope.playerService = PlayerService; // save a reference for expressions and children
         $scope.playerStateMsg = PlayerService.PlayerState.stateToString(PlayerService.currentPlayerState);
@@ -43,12 +51,12 @@ songbuzzApp.controller('PlayerController', ['$scope', '$timeout', 'PlayerService
         /** Asks the PlayerService to play the previous song in the playlist. */
         $scope.playPreviousButton = function () {
             PlayerService.playPrevious();
-        }
+        };
 
         /** Asks the PlayerService to play the next song in the playlist. */
         $scope.playNextButton = function () {
             PlayerService.playNext();
-        }
+        };
 
         /** Asks the PlayerService to stop playback. */
         $scope.stopButton = function () {
@@ -68,6 +76,10 @@ songbuzzApp.controller('PlayerController', ['$scope', '$timeout', 'PlayerService
             }
         };
 
+        /**
+         * Retrieves the current song title or none if uninitialized.
+         * @returns {string} the current song title.
+         */
         $scope.getSongTitle = function () {
             var songTitle = PlayerService.currentSong.title;
             if (songTitle === undefined) {
@@ -82,7 +94,7 @@ songbuzzApp.controller('PlayerController', ['$scope', '$timeout', 'PlayerService
          */
         $scope.getTotalDuration = function () {
             return PlayerService.getPlayerDuration();
-        }
+        };
 
         /**
          * Retrieves the current song position.
@@ -90,12 +102,31 @@ songbuzzApp.controller('PlayerController', ['$scope', '$timeout', 'PlayerService
          */
         $scope.getCurrentDuration = function () {
             return PlayerService.getPlayerCurrentTime();
-        }
+        };
 
+        /**
+         * Calculates the new time position and requests the YouTube Player seek to that.
+         *
+         * The algorithm is simple: (event.click_position/progressbar.width)*song.total_length
+         *
+         * @param ev {Object} a jquery event object
+         */
+        $scope.progressBarClick = function(ev) {
+            var newTimeOffset = (ev.offsetX/ev.currentTarget.clientWidth)*PlayerService.getPlayerDuration();
+            PlayerService.seekTime(newTimeOffset);
+        };
+
+        /**
+         * Updates the progress variable with the current progress.
+         *
+         * It first reschedules the timer (running every 250ms) that updates the time
+         * progress bar and then updates the progress variable used to mark the progress
+         * in percentage.
+         */
         $scope.updateSongProgress = function () {
             $scope.songProgressTimer = $timeout($scope.updateSongProgress, 250);
             $scope.progress = ($scope.getCurrentDuration() / $scope.getTotalDuration()) * 100;
-        }
+        };
 
         /*********************************
          *   Event broadcast handlers.   *
@@ -133,6 +164,12 @@ songbuzzApp.controller('PlayerController', ['$scope', '$timeout', 'PlayerService
         });
 
 
+        /**
+         * Formats a song duration into human readable format.
+         *
+         * @param songDuration {number} the duration in seconds.
+         * @returns {string} a human readable time string, e.g. 1m 5s
+         */
         $scope.friendlyDuration = function (songDuration) {
             var minutes = Math.floor(songDuration / 60);
             var seconds = Math.floor(songDuration - minutes * 60);
