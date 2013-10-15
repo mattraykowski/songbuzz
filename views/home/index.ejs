@@ -26,10 +26,6 @@
                             ng-click="playNextButton()">
                         <i class="glyphicon glyphicon-step-forward"></i>
                     </button>
-                    <!--<button class="btn btn-xs"-->
-                    <!--ng-click="toggleVisible()">-->
-                    <!--<i class="glyphicon glyphicon-facetime-video"></i>-->
-                    <!--</button>-->
                 </div>
             </div>
             <div ng-click="progressBarClick($event)" class=" "
@@ -40,19 +36,13 @@
                 </div>
             </div>
             <div id="playingDescr">
-                Now Playing: {{ getSongTitle() }} :: {{ friendlyDuration(getCurrentDuration()) }}
+                <span class="badge">Now Playing</span>: {{ getSongTitle() }} :: {{ friendlyDuration(getCurrentDuration()) }}
             </div>
-
-
-            <!--</div>-->
         </div>
         <div class="col-xs-12 col-md-3">
-            <!--<div class="well">-->
-            <!--<player-view/>-->
             <div class="text-center">
-                    <div id="player"></div>
+                <div id="player"></div>
             </div>
-            <!--</div>-->
         </div>
         <div class="col-xs-12 col-md-2">
             <div class="well well-large">
@@ -62,13 +52,13 @@
     </div>
 </div>
 <div class="row">
-<div class="col-md-4">
-    <!-- Playlist List -->
-    <div ng-include src="'/partials/playlist-list.html'"></div>
+    <div class="col-md-4">
+        <!-- Playlist List -->
+        <div ng-include src="'/partials/playlist-list.html'"></div>
+    </div>
+    <div class="col-xs-12 col-md-8">
+        <!-- Playlist Detail -->
+        <div ng-view></div>
+    </div>
 </div>
-<div class="col-xs-12 col-md-8">
-    <!-- Playlist Detail -->
-    <div ng-view></div>
-</div>
-</div>
-        </div>
+
