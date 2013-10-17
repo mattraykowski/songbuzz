@@ -17,7 +17,7 @@
             <th><input ng-model="songFilter" placeholder="filter songs..."></th> <!-- song actions -->
         </tr>
     </thead>
-    <tbody ui-sortable ui-options="{update: onPlaylistSorted, axis: 'y'}" ng-model="playlist.songs">
+    <tbody ui-sortable="{update: onPlaylistSorted, axis: 'y'}" ng-model="playlist.songs">
         <tr ng-repeat="song in playlist.songs | filter:songFilter">
             <td><img src="{{song.thumbUrl}}" width="48" heigth="48"/></td>
             <td>{{song.title}}</td>

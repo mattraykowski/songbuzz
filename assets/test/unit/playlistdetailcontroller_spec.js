@@ -44,15 +44,31 @@ describe("PlaylistDetailController", function () {
     });
 
     describe("changePlaylist event handler", function () {
-        it("should receive 'changePlaylist' and update the the current playlist.", inject(function ($rootScope, $timeout) {
-            scope.playlist = samplePlaylists[0];
-            PlayerServiceMock.currentPlaylist = samplePlaylists[1];
+        it("should receive 'changePlaylist' call the fetch method", inject(function ($rootScope, $timeout) {
+            spyOn(scope, 'fetchPlaylist');
+            PlayerServiceMock.currentPlaylist = samplePlaylists[0];
 
             $rootScope.$broadcast('changePlaylist');
 
-            expect(scope.playlist).toBe(samplePlaylists[1]);
+            expect(scope.fetchPlaylist).toHaveBeenCalledWith(samplePlaylists[0].id);
         }));
     });
+
+    describe("fetchPlaylist", function() {
+        it("should fetch the current playlist by ID.", inject(function ($rootScope, $httpBackend) {
+            // It's going to try and retrieve the default playlist first. Get that out of the way.
+            $httpBackend.expectGET('/playlist/509ad256be436abe20000002').respond(samplePlaylists[0]);
+            $rootScope.$digest();
+
+            // Now begin testing the fetch method.
+            $httpBackend.expectGET("/playlist/" + samplePlaylists[1].id).respond(samplePlaylists[1]);
+
+            scope.fetchPlaylist(samplePlaylists[1].id);
+
+            $rootScope.$digest();
+
+        }));
+    })
 
     describe("doAddSelectedSong", function () {
         it("should add new songs to playlists from the search results", function () {

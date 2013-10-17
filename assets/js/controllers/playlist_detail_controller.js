@@ -14,12 +14,29 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
         $scope.songDone = true;
         $scope.progress = 0;
 
-        $scope.playlist = PlayerService.currentPlaylist;
-
         //@tested
         $scope.$on('changePlaylist', function () {
-            $scope.playlist = PlayerService.currentPlaylist;
+            //$scope.playlist = PlayerService.currentPlaylist;
+            $scope.fetchPlaylist(PlayerService.currentPlaylist.id);
         });
+
+        $scope.fetchPlaylist = function(playlistId) {
+            Restangular.one('playlist', playlistId).get().then(function(playlist) {
+                $scope.playlist = playlist;
+                PlayerService.changePlaylist($scope.playlist);
+            });
+
+        };
+
+        // Fetch the appropriate playlist.
+        // * if there's a playlist ID in the URL, fetch that, otherwise...
+        // * if there's a currently playing playlist, fetch that, otherwise...
+        // * default the playlist to a blank object.
+        if($routeParams.playlistId) {
+            $scope.fetchPlaylist($routeParams.playlistId);
+        } else if(PlayerService.currentPlaylist != undefined) {
+            $scope.fetchPlaylist(PlayerService.currentPlaylist.id);
+        }
 
         $scope.formatYtSong = function (vid) {
             var title = vid.snippet.title;
@@ -32,7 +49,7 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
                 title: title,
                 viewCount: viewCount,
                 videoId: videoId,
-                thumbUrl: thumbUrl,
+                thumbUrl: thumbUrl
             };
 
             return entry;
@@ -80,7 +97,7 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
             PlayerService.playIndex(songIndex);
         };
 
-        $scope.onPlaylistSorted = function () {
+        $scope.onPlaylistSorted = function (e, ui) {
             $scope.playlist.put();
         }
     }]);

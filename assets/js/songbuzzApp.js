@@ -4,7 +4,8 @@ var songbuzzApp = angular.module('songbuzz', ['ngRoute', 'restangular', 'ui.sort
 
 songbuzzApp.config(['$routeProvider', '$locationProvider', 'RestangularProvider', function($routeProvider, $locationProvider, RestangularProvider) {
     $routeProvider.when("/playlists", {
-        templateUrl: "partials/playlist-general.html"
+        templateUrl: "/partials/playlist-detail.html",
+        controller: 'PlaylistDetailController'
     }).when("/playlists/:playlistId", {
         templateUrl: "/partials/playlist-detail.html",
         controller: 'PlaylistDetailController'

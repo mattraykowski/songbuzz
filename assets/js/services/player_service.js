@@ -181,7 +181,7 @@ songbuzzApp.factory('PlayerService', function ($rootScope) {
             if (this.currentPlaylist.songs == undefined) {
                 this.currentPlaylist.songs = [];
             }
-            $rootScope.$broadcast('changePlaylist');
+            //$rootScope.$broadcast('changePlaylist');
         },
 
         // Misc. Player Utilities

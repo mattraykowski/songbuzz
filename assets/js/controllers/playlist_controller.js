@@ -1,13 +1,12 @@
 'use strict';
 
-songbuzzApp.controller('PlaylistListController', ['$scope', '$timeout', 'PlayerService', 'Restangular',
-    function ($scope, $timeout, PlayerService, Restangular) {
+songbuzzApp.controller('PlaylistListController', ['$scope', '$timeout', '$location', 'PlayerService', 'Restangular',
+    function ($scope, $timeout, $location, PlayerService, Restangular) {
         $scope.playlists = [];
         $scope.playlistService = Restangular.all('playlist');
 
         $scope.updatePlaylists = function () {
-            //$scope.playlists = PlaylistService.query();
-            $scope.playlistService.getList().then(
+            Restangular.all('playlist').getList().then(
                 function (playlists) {
                     $scope.playlists = playlists;
                 });
@@ -29,7 +28,8 @@ songbuzzApp.controller('PlaylistListController', ['$scope', '$timeout', 'PlayerS
         };
 
         $scope.changePlaylist = function (idx) {
-            PlayerService.changePlaylist($scope.playlists[idx]);
+            //PlayerService.changePlaylist($scope.playlists[idx]);
+            $location.path('/playlists/'+$scope.playlists[idx].id);
         };
 
         $scope.updatePlaylists();

@@ -10,7 +10,6 @@ songbuzzApp.controller('MainController', ['$scope', '$timeout', 'Restangular', f
         Restangular.all("auth").customGET("authenticated").then(function(status) {
             $scope.loggedIn = status.authenticated;
             $scope.currentUser = status.current;
-            console.log(status);
         });
     }
     $scope.pullAuthenticationStatus();

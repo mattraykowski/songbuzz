@@ -4,7 +4,7 @@ describe("PlaylistListController", function() {
 	var playerCtrl;
 
 	beforeEach(module('songbuzz'));
-	beforeEach(inject(function(_$rootScope_, _$controller_, _$timeout_, _$httpBackend_, _Restangular_) {
+	beforeEach(inject(function(_$rootScope_, _$controller_, _$timeout_, _$location_, _$httpBackend_, _Restangular_) {
         rootScope = _$rootScope_;
 		scope = _$rootScope_.$new();
 		$controller = _$controller_;
@@ -14,6 +14,7 @@ describe("PlaylistListController", function() {
 		playlistListCtrl = $controller('PlaylistListController', {
 			$scope: scope,
 			$timeout: _$timeout_,
+            $location: _$location_,
 			PlayerService: PlayerServiceMock,
             Restangular: _Restangular_
 		});
@@ -67,15 +68,15 @@ describe("PlaylistListController", function() {
     });
 
     describe("changePlaylist", function(){
-        it("should request the PlayerService change playlists", function() {
-            spyOn(PlayerServiceMock, 'changePlaylist');
+        it("should change location to the detailed view",  inject(function($location) {
+            //spyOn(PlayerServiceMock, 'changePlaylist');
 
             var idx = 1;
-            var playlist = samplePlaylists[idx];
+            //var playlist = samplePlaylists[idx];
             scope.playlists = samplePlaylists;
 
             scope.changePlaylist(idx);
-            expect(PlayerServiceMock.changePlaylist).toHaveBeenCalledWith(playlist);
-        });
+            expect($location.path()).toBe('/playlists/' + samplePlaylists[idx].id);
+        }));
     });
 });

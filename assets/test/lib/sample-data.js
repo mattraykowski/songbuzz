@@ -56,7 +56,7 @@ var samplePlaylists = [
     {
         remove: function() {},
         "__v":5,
-        "_id":"509ad256be436abe20000002",
+        "id":"509ad256be436abe20000002",
         "owner":"50a3d21fbf625a2560000002",
         "title":"Hansen",
         "songs": [
@@ -75,7 +75,7 @@ var samplePlaylists = [
     {
         remove: function() {},
         "title":"Techno",
-        "_id":"50a29a963eb878714d000005",
+        "id":"50a29a963eb878714d000005",
         "__v":0,
         "owner":"50a3d21fbf625a2560000002",
         "selected":false,
@@ -85,7 +85,7 @@ var samplePlaylists = [
     {
         remove: function() {},
         "title":"Country",
-        "_id":"50a29a8e3eb878714d000004",
+        "id":"50a29a8e3eb878714d000004",
         "__v":0,
         "owner":"50a3d21fbf625a2560000002",
         "songs":[],
@@ -96,7 +96,7 @@ var samplePlaylists = [
     {
         remove: function() {},
         "title":"Rock N Roll",
-        "_id":"50a299213eb878714d000002",
+        "id":"50a299213eb878714d000002",
         "__v":0,
         "owner":"50a3d21fbf625a2560000002",
         "songs":[],
@@ -107,7 +107,7 @@ var samplePlaylists = [
     {
         remove: function() {},
         "title":"Dubstep",
-        "_id":"50a2882e6e32619d70000008",
+        "id":"50a2882e6e32619d70000008",
         "__v":0,
         "owner":"50a3d21fbf625a2560000002",
         "songs":[],
@@ -118,7 +118,7 @@ var samplePlaylists = [
     {
         remove: function() {},
         "title":"Rap",
-        "_id":"50a29a7a3eb878714d000003",
+        "id":"50a29a7a3eb878714d000003",
         "__v":0,
         "owner":"50a3d21fbf625a2560000002",
         "songs":[],
@@ -130,7 +130,7 @@ var samplePlaylists = [
         remove: function() {},
         "title":"F",
         "owner":"50a3d21fbf625a2560000002",
-        "_id":"50a3ecff9274e7b52f000002",
+        "id":"50a3ecff9274e7b52f000002",
         "__v":0,
         "songs":[],
         "selected":false,
@@ -140,7 +140,7 @@ var samplePlaylists = [
     {
         remove: function() {},
         "__v":3,
-        "_id":"509a9b11966a398a4a000002",
+        "id":"509a9b11966a398a4a000002",
         "owner":"50a3d21fbf625a2560000002",
         "title":"Test Playlist",
         "songs": [

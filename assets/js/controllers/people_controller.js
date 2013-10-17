@@ -10,7 +10,6 @@ songbuzzApp.controller('PeopleController', ['$scope', 'Restangular', function ($
             .getList({limit: $scope.peopleLimit, offset: $scope.peopleOffset})
             .then(function (people) {
                 $scope.people = people;
-                console.log(people);
             });
     };
     $scope.fetchPeople();
