@@ -4,17 +4,17 @@ describe("PlaylistDetailController", function () {
     var playerCtrl;
 
     beforeEach(module('songbuzz'));
-    beforeEach(inject(function (_$rootScope_, _$controller_, _$timeout_, _$routeParams_) {
+    beforeEach(inject(function (_$rootScope_, _$controller_, _$timeout_, _$routeParams_, _PlayerService_, _Restangular_) {
         scope = _$rootScope_.$new();
         $controller = _$controller_;
+        PlayerService = _PlayerService_;
 
         playlistDetailCtrl = $controller('PlaylistDetailController', {
             $scope: scope,
             $timeout: _$timeout_,
             $routeParams: _$routeParams_,
-            PlayerService: PlayerServiceMock,
-            PlaylistService: PlaylistServiceMock,
-            YouTubeAPI: YouTubeAPIMock
+            PlayerService: _PlayerService_,
+            Restangular: _Restangular_
         });
     }));
 
@@ -96,4 +96,13 @@ describe("PlaylistDetailController", function () {
             // TODO: implement this test.
         });
     });
+
+    describe("isPlayingSong", function() {
+        it("should return true if 'song' is playing", function() {
+            var sample_song = samplePlaylists[0].songs[0];
+            PlayerService.currentSong = sample_song;
+
+            expect(scope.isPlayingSong(sample_song)).toBeTruthy();
+        });
+    })
 });

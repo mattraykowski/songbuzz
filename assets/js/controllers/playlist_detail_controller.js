@@ -101,5 +101,13 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
 
         $scope.onPlaylistSorted = function (e, ui) {
             $scope.playlist.put();
-        }
+        };
+
+        $scope.isPlayingSong = function(song) {
+            if(PlayerService.currentSong == song) {
+                return true;
+            }
+
+            return false;
+        };
     }]);
