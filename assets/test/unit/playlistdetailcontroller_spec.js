@@ -46,7 +46,7 @@ describe("PlaylistDetailController", function () {
     describe("changePlaylist event handler", function () {
         it("should receive 'changePlaylist' call the fetch method", inject(function ($rootScope, $timeout) {
             spyOn(scope, 'fetchPlaylist');
-            PlayerServiceMock.currentPlaylist = samplePlaylists[0];
+            PlayerService.currentPlaylist = samplePlaylists[0];
 
             $rootScope.$broadcast('changePlaylist');
 
@@ -103,6 +103,15 @@ describe("PlaylistDetailController", function () {
             PlayerService.currentSong = sample_song;
 
             expect(scope.isPlayingSong(sample_song)).toBeTruthy();
+        });
+    });
+
+    describe("playingBadgeText", function() {
+        it("should return the playing state string", function() {
+            spyOn(PlayerService.PlayerState, 'stateToString').andReturn('playing');
+            PlayerService.currentPlayerState = PlayerService.PlayerState.PLAYING;
+
+            expect(scope.playingBadgeText()).toBe('playing');
         });
     })
 });

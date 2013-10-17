@@ -103,6 +103,12 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
             $scope.playlist.put();
         };
 
+        /**
+         * Determines if the 'song' parameter is the currently playing song.
+         *
+         * @param song {Object} a playlist song object
+         * @returns {boolean} true if the current song and the parameter match.
+         */
         $scope.isPlayingSong = function(song) {
             if(PlayerService.currentSong == song) {
                 return true;
@@ -110,4 +116,13 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
 
             return false;
         };
+
+        /**
+         * Retrieves the text for the current state of the player.
+         *
+         * @returns {String} the player state as a human readable string
+         */
+        $scope.playingBadgeText = function() {
+            return PlayerService.PlayerState.stateToString(PlayerService.currentPlayerState);
+        }
     }]);

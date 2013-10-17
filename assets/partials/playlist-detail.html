@@ -26,7 +26,8 @@
                     <button class="btn" ng-click="removeSong($index)"><i class="glyphicon glyphicon-remove"></i></button>
                     <button class="btn" ng-click="playSong($index)"><i class="glyphicon glyphicon-play"></i></button>
                 </div>
-                <i ng-show="isPlayingSong(song)" class="glyphicon glyphicon-music"></i>
+                <!--<i ng-show="isPlayingSong(song)" class="glyphicon glyphicon-music"></i>-->
+                <span class="badge" ng-show="isPlayingSong(song)" ng-bind="playingBadgeText()"></span>
             </td>
         </tr>
         <tr ng-hide="playlist.songs.length > 0">
