@@ -63,7 +63,7 @@ songbuzzApp.factory('PlayerService', function ($rootScope) {
 
             this.ytPlayer = new YT.Player('player', {
                 height: '200',
-                width: '200',
+                width: '340',
                 videoId: 'vmnWJBRrVYo',
                 playerVars: {
                     //autohide: 1,
