@@ -31,9 +31,11 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
         // Fetch the appropriate playlist.
         // * if there's a playlist ID in the URL, fetch that, otherwise...
         // * if there's a currently playing playlist, fetch that, otherwise...
-        // * default the playlist to a blank object.
+        // * if there's a currently selected playlist, fetch that...
         if($routeParams.playlistId) {
             $scope.fetchPlaylist($routeParams.playlistId);
+        } else if(PlayerService.playingPlaylist != undefined) {
+            $scope.fetchPlaylist(PlayerService.playingPlaylist.id);
         } else if(PlayerService.currentPlaylist != undefined) {
             $scope.fetchPlaylist(PlayerService.currentPlaylist.id);
         }
