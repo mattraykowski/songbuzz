@@ -16,7 +16,6 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
 
         //@tested
         $scope.$on('changePlaylist', function () {
-            //$scope.playlist = PlayerService.currentPlaylist;
             $scope.fetchPlaylist(PlayerService.currentPlaylist.id);
         });
 
@@ -28,24 +27,32 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
 
         };
 
-        // Fetch the appropriate playlist.
-        // * if there's a playlist ID in the URL, fetch that, otherwise...
-        // * if there's a currently playing playlist, fetch that, otherwise...
-        // * if there's a currently selected playlist, fetch that...
-        if($routeParams.playlistId) {
-            $scope.fetchPlaylist($routeParams.playlistId);
-        } else if(PlayerService.playingPlaylist != undefined) {
-            $scope.fetchPlaylist(PlayerService.playingPlaylist.id);
-        } else if(PlayerService.currentPlaylist != undefined) {
-            $scope.fetchPlaylist(PlayerService.currentPlaylist.id);
-        }
+        /**
+         * Performs the initial controller creation fetch.
+         *
+         * 1. if there's a playlist ID in the URL, fetch that, otherwise...
+         * 2. if there's a currently playing playlist, fetch that, otherwise...
+         * 3. if there's a currently selected playlist, fetch that..
+         * 4. default object to null (view hides/shows based on this.)
+         */
+        $scope.initialFetch = function() {
+            if ($routeParams.playlistId) {
+                $scope.fetchPlaylist($routeParams.playlistId);
+            } else if (PlayerService.playingPlaylist != undefined && !_.isEmpty(PlayerService.playingPlaylist)) {
+                $scope.fetchPlaylist(PlayerService.playingPlaylist.id);
+            } else if (PlayerService.currentPlaylist != undefined && !_.isEmpty(PlayerService.currentPlaylist)) {
+                $scope.fetchPlaylist(PlayerService.currentPlaylist.id);
+            } else {
+                $scope.playlist = null;
+            }
+        };
+        $scope.initialFetch();
 
         $scope.formatYtSong = function (vid) {
             var title = vid.snippet.title;
             var viewCount = 0;
             var videoId = vid.id.videoId;
             var thumbUrl = vid.snippet.thumbnails.default.url;
-            //var duration = vid.media$group.yt$duration.seconds;
 
             var entry = {
                 title: title,

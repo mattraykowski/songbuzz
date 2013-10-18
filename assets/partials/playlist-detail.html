@@ -1,67 +1,83 @@
-<div class="row">
-  <div class="col-lg-8"><input type="hidden" style="width: 95%" yt-select /></div>
-  <div class="col-lg-2"><button class="btn btn-success btn-small" ng-disabled="!ytSelectSelected" ng-click="doAddSelectedSong()">Add Song</button></div>
-</div>
-
-<div class="row">
-  <div class="col-12">
-<h3>{{playlist.title}}</h3>
-
-<h4>Playlists</h4>
-
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>&nbsp;</th> <!-- image thumbnail -->
-            <th>Song</th>
-            <th><input ng-model="songFilter" placeholder="filter songs..."></th> <!-- song actions -->
-        </tr>
-    </thead>
-    <tbody ui-sortable="{update: onPlaylistSorted, axis: 'y'}" ng-model="playlist.songs">
-        <tr ng-repeat="song in playlist.songs | filter:songFilter">
-            <td><img src="{{song.thumbUrl}}" width="48" heigth="48"/></td>
-            <td>{{song.title}}</td>
-            <td>
-                <div class="btn-group">
-                    <button class="btn" ng-click="removeSong($index)"><i class="glyphicon glyphicon-remove"></i></button>
-                    <button class="btn" ng-click="playSong($index)"><i class="glyphicon glyphicon-play"></i></button>
-                </div>
-                <!--<i ng-show="isPlayingSong(song)" class="glyphicon glyphicon-music"></i>-->
-                <span class="badge" ng-show="isPlayingSong(song)" ng-bind="playingBadgeText()"></span>
-            </td>
-        </tr>
-        <tr ng-hide="playlist.songs.length > 0">
-            <td colspan="4">No Songs in Playlist</td>
-        </tr>
-    </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="4" ng-hide="playlist.songs.length < 1">{{playlist.songs.length}} songs.</td>
-            <td colspan="4" ng-hide="playlist.songs.length > 0">&nbsp;</td>
-        </tr>
-    </tfoot>
-</table>
-
-<!--
-<div class="well">
-    <p>Add Song</p>
-
-    <div>
-        <yt-autocomplete selection="selectedSong" list="doGetAutocomplete"></yt-autocomplete>
-        <span>
-          <button class="btn btn-success btn-sm" ng-click="doAddSelectedSong()" type="button"><i class="glyphicon glyphicon-plus"></i></button>
-        </span>
+<div>
+    <div ng-show="playlist == null">
+        <h1>No Playlist Selected</h1>
+        <p>Please select a playlist from the left or create a new one.</p>
     </div>
-</div>
- -->
+    <div ng-hide="playlist == null">
+        <div class="row">
+            <div class="col-lg-8"><input type="hidden" style="width: 95%" yt-select/></div>
+            <div class="col-lg-2">
+                <button class="btn btn-success btn-small" ng-disabled="!ytSelectSelected"
+                        ng-click="doAddSelectedSong()">Add Song
+                </button>
+            </div>
+        </div>
 
-<!-- Disable debug info for now
-<p>Debug Info</p>
-<p>Saerch Terms: {{ytSearchParameter}}</p>
-<p> Search Results:</p>
-<p>{{searchResults}}</p>
-<p>TBD: detail view for {{playlistId}}</p>
-<p></p>
-<p>{{playlist}}</p> -->
-  </div>
+        <div class="row">
+            <div class="col-12">
+                <h3>{{playlist.title}}</h3>
+
+                <h4>Playlists</h4>
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <!-- image thumbnail -->
+                        <th>Song</th>
+                        <th><input ng-model="songFilter" placeholder="filter songs..."></th>
+                        <!-- song actions -->
+                    </tr>
+                    </thead>
+                    <tbody ui-sortable="{update: onPlaylistSorted, axis: 'y'}" ng-model="playlist.songs">
+                    <tr ng-repeat="song in playlist.songs | filter:songFilter">
+                        <td><img src="{{song.thumbUrl}}" width="48" heigth="48"/></td>
+                        <td>{{song.title}}</td>
+                        <td>
+                            <div class="btn-group">
+                                <button class="btn" ng-click="removeSong($index)"><i
+                                        class="glyphicon glyphicon-remove"></i></button>
+                                <button class="btn" ng-click="playSong($index)"><i class="glyphicon glyphicon-play"></i>
+                                </button>
+                            </div>
+                            <!--<i ng-show="isPlayingSong(song)" class="glyphicon glyphicon-music"></i>-->
+                            <span class="badge" ng-show="isPlayingSong(song)" ng-bind="playingBadgeText()"></span>
+                        </td>
+                    </tr>
+                    <tr ng-hide="playlist.songs.length > 0">
+                        <td colspan="4">No Songs in Playlist</td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="4" ng-hide="playlist.songs.length < 1">{{playlist.songs.length}} songs.</td>
+                        <td colspan="4" ng-hide="playlist.songs.length > 0">&nbsp;</td>
+                    </tr>
+                    </tfoot>
+                </table>
+
+                <!--
+                <div class="well">
+                    <p>Add Song</p>
+
+                    <div>
+                        <yt-autocomplete selection="selectedSong" list="doGetAutocomplete"></yt-autocomplete>
+                        <span>
+                          <button class="btn btn-success btn-sm" ng-click="doAddSelectedSong()" type="button"><i class="glyphicon glyphicon-plus"></i></button>
+                        </span>
+                    </div>
+                </div>
+                 -->
+
+                <!-- Disable debug info for now
+                <p>Debug Info</p>
+                <p>Saerch Terms: {{ytSearchParameter}}</p>
+                <p> Search Results:</p>
+                <p>{{searchResults}}</p>
+                <p>TBD: detail view for {{playlistId}}</p>
+                <p></p>
+                <p>{{playlist}}</p> -->
+            </div>
+        </div>
+    </div>
 </div>
