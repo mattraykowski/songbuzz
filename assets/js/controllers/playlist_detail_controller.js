@@ -48,6 +48,14 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
         };
         $scope.initialFetch();
 
+
+        /**
+         * Takes a video entry from the YouTube Search API and formats it to
+         * the SongBuzz internal format.
+         *
+         * @param vid {Object} YouTube Video Search Result (single)
+         * @returns {{title: String, viewCount: number, videoId: String, thumbUrl: String}}
+         */
         $scope.formatYtSong = function (vid) {
             var title = vid.snippet.title;
             var viewCount = 0;
@@ -64,6 +72,11 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
             return entry;
         };
 
+        /**
+         * Adds the currently selected song from the search component to the
+         * end of the currently selected playlist. It then broadcasts 'ytSelectSongAdded'
+         * so that the ytSelect directive can react.
+         */
         $scope.doAddSelectedSong = function () {
             if ($scope.ytSelectVideo == undefined || $scope.ytSelectVideo == null) {
                 return; // Can't do anything if the button was erroneously clicked.
@@ -83,11 +96,25 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
             $rootScope.$broadcast("ytSelectSongAdded");
         };
 
+        /**
+         * Using an index it finds a song in the current playlist
+         * and removes it from the songs array.
+         *
+         * @param idx {Number} Index location of the song to remove.
+         */
         $scope.removeSong = function (idx) {
             $scope.playlist.songs.splice(idx, 1);
             $scope.playlist.put();
         };
 
+        /**
+         * Takes a duration in seconds and converts it into a human
+         * readable format, for example 125 seconds will format to
+         * '2m 5s'.
+         *
+         * @param songDuration {Number} Amount of time in seconds.
+         * @returns {string} a human ready friendly time format.
+         */
         $scope.friendlyDuration = function (songDuration) {
             var minutes = Math.floor(songDuration / 60);
             var seconds = Math.floor(songDuration - minutes * 60);
@@ -106,6 +133,12 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
             PlayerService.playIndex(songIndex);
         };
 
+        /**
+         * Receives the 'update' event from ui-sortable and saves the playlist.
+         *
+         * @param e {Object} jQuery event
+         * @param ui {Object} jQuery UI object
+         */
         $scope.onPlaylistSorted = function (e, ui) {
             $scope.playlist.put();
         };
