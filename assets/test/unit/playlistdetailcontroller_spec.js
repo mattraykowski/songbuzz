@@ -4,7 +4,7 @@ describe("PlaylistDetailController", function () {
     var playerCtrl;
 
     beforeEach(module('songbuzz'));
-    beforeEach(inject(function (_$rootScope_, _$controller_, _$timeout_, _$routeParams_, _PlayerService_, _Restangular_) {
+    beforeEach(inject(function (_$rootScope_, _$controller_, _$timeout_, _$routeParams_, _PlayerService_, _PlaylistRestService_) {
         scope = _$rootScope_.$new();
         $controller = _$controller_;
         PlayerService = _PlayerService_;
@@ -14,7 +14,7 @@ describe("PlaylistDetailController", function () {
             $timeout: _$timeout_,
             $routeParams: _$routeParams_,
             PlayerService: _PlayerService_,
-            Restangular: _Restangular_
+            PlaylistRestService: _PlaylistRestService_
         });
     }));
 
@@ -55,18 +55,10 @@ describe("PlaylistDetailController", function () {
     });
 
     describe("fetchPlaylist", function() {
-        it("should fetch the current playlist by ID.", inject(function ($rootScope, $httpBackend) {
-            // It's going to try and retrieve the default playlist first. Get that out of the way.
-            $httpBackend.expectGET('/playlist/509ad256be436abe20000002').respond(samplePlaylists[0]);
-            $rootScope.$digest();
-
-            // Now begin testing the fetch method.
-            $httpBackend.expectGET("/playlist/" + samplePlaylists[1].id).respond(samplePlaylists[1]);
-
+        it("should fetch the current playlist by ID.", inject(function ($rootScope, PlaylistRestService) {
+            spyOn(PlaylistRestService, 'get').andReturn(getThenObject(samplePlaylists[1]))
             scope.fetchPlaylist(samplePlaylists[1].id);
-
-            $rootScope.$digest();
-
+            expect(PlaylistRestService.get).toHaveBeenCalledWith(samplePlaylists[1].id);
         }));
     })
 

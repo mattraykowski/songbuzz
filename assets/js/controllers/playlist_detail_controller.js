@@ -5,8 +5,8 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
     '$timeout',
     '$routeParams',
     'PlayerService',
-    'Restangular',
-    function ($rootScope, $scope, $timeout, $routeParams, PlayerService, Restangular) {
+    'PlaylistRestService',
+    function ($rootScope, $scope, $timeout, $routeParams, PlayerService, PlaylistRestService) {
         $scope.playlistId = $routeParams.playlistId;
         $scope.searchResults = '';
         $scope.playingSong = {};
@@ -20,7 +20,7 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
         });
 
         $scope.fetchPlaylist = function(playlistId) {
-            Restangular.one('playlist', playlistId).get().then(function(playlist) {
+            PlaylistRestService.get(playlistId).then(function(playlist) {
                 $scope.playlist = playlist;
                 PlayerService.changePlaylist($scope.playlist);
             });

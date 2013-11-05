@@ -2,53 +2,46 @@ describe("PlaylistListController", function() {
 	var scope;
 	var $controller;
 	var playerCtrl;
+    var PlaylistRestService;
 
 	beforeEach(module('songbuzz'));
-	beforeEach(inject(function(_$rootScope_, _$controller_, _$timeout_, _$location_, _$httpBackend_, _Restangular_) {
+	beforeEach(inject(function(_$rootScope_, _$controller_, _$timeout_, _$location_, _PlaylistRestService_) {
         rootScope = _$rootScope_;
 		scope = _$rootScope_.$new();
 		$controller = _$controller_;
-        httpBackend = _$httpBackend_;
-        httpBackend.expectGET("/playlist").respond(samplePlaylists);
+        PlaylistRestService = _PlaylistRestService_;
 
 		playlistListCtrl = $controller('PlaylistListController', {
 			$scope: scope,
 			$timeout: _$timeout_,
             $location: _$location_,
 			PlayerService: PlayerServiceMock,
-            Restangular: _Restangular_
+            PlaylistRestService: _PlaylistRestService_
 		});
 	}));
 
     describe("updatePlaylists", function() {
         it("should get the playlists via REST", function() {
-            httpBackend.expectGET("/playlist").respond(samplePlaylists);
-            rootScope.$digest();
-            //expect(scope.playlists).toBe(samplePlaylists);
+            spyOn(PlaylistRestService, 'getAll').andReturn(getThenObject(samplePlaylists));
+            scope.updatePlaylists();
+            expect(PlaylistRestService.getAll).toHaveBeenCalled();
         });
     });
 
     describe("addNewPlaylist", function() {
         it("should add a new playlist via REST and then request an update", inject(function($rootScope, $timeout) {
             scope.playlistTitle = "Test XYZ";
-            httpBackend.expectPOST("/playlist", '{"title":"' + scope.playlistTitle + '"}')
-                .respond(201, '');
+            spyOn(PlaylistRestService, "create").andReturn(getThenObject({}));
             spyOn(scope, 'updatePlaylists');
 
             scope.addNewPlaylist();
-            rootScope.$digest();
-
-
-            // TODO: fix this expectation. It should match but does not, even though the code works.
-            //expect(scope.updatePlaylists).toHaveBeenCalled();
+            expect(PlaylistRestService.create).toHaveBeenCalledWith({title: scope.playlistTitle});
+            expect(scope.updatePlaylists).toHaveBeenCalled();
         }));
     });
 
     describe("deletePlaylist", function() {
         it("remove the playlist via REST", inject(function($rootScope, $timeout) {
-            // Restangular fires a get each time the base object is accessed
-            httpBackend.expectGET("/playlist").respond(samplePlaylists);
-
             // Mock up the sample playlists and select one to delete.
             scope.playlists = samplePlaylists;
             toDeletePlaylist = samplePlaylists[0];
@@ -59,7 +52,6 @@ describe("PlaylistListController", function() {
             spyOn(scope, 'updatePlaylists');
 
             scope.deletePlaylist(toDeletePlaylist);
-            rootScope.$digest();
 
             // fix this expectation. It should match but does not, even though the code works.
             expect(toDeletePlaylist.remove).toHaveBeenCalled();

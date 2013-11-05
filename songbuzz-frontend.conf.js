@@ -28,6 +28,7 @@ module.exports = function(config) {
       'assets/components/angular-ui-select2/src/select2.js',
       'assets/components/restangular/dist/restangular.js',
       'assets/components/angular-mocks/angular-mocks.js',
+      'assets/test/lib/helpers.js',
       'assets/test/lib/object-mocks.js',
       'assets/test/lib/sample-data.js',
       'assets/js/songbuzzApp.js',
