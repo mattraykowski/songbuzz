@@ -88,7 +88,7 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
             }
 
             // Set the song settings
-            $scope.playlist.songs.push($scope.formatYtSong($scope.ytSelectVideo));
+            $scope.playlist.songs.push($scope.ytSelectVideo);
 
             // Save the playlist.
             $scope.playlist.put();

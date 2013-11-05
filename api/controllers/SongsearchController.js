@@ -39,6 +39,7 @@ module.exports = {
 
         // Use 'request' to get the raw data from the YT API.
         rest.get(url, { qs: requestParams }, function (error, response, data) {
+            console.log(data);
             var searchResults = JSON.parse(data);
 
             if (error || searchResults == undefined || searchResults.pageInfo == undefined) {

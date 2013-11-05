@@ -25,12 +25,6 @@ describe("PlaylistDetailController", function () {
         });
     });
 
-    describe("formatYtSong", function () {
-        it("should convert a YT search result to a local song object", function () {
-            // TODO: implement this.
-        });
-    });
-
     describe("removeSong", function () {
         it("should remove a song based on its array index", function () {
             // TODO: implement this.
@@ -76,7 +70,7 @@ describe("PlaylistDetailController", function () {
             scope.doAddSelectedSong();
 
             expect(scope.playlist.songs.length).toBe(1);
-            expect(scope.playlist.songs[0].videoId).toBe("4vTyEy7Dn70");
+            expect(scope.playlist.songs[0].videoId).toBe(sampleYouTubeAPISongEntry.videoId);
             expect(scope.playlist.put).toHaveBeenCalled();
         });
 
