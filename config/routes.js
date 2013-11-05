@@ -28,54 +28,61 @@
 
 module.exports.routes = {
 
-  '/' : {
-    controller : 'home'
-  },
+    '/': {
+        controller: 'home'
+    },
 
-  '/login' : {
-    controller : 'auth',
-    action     : 'index'
-  },
+    '/login': {
+        controller: 'auth',
+        action: 'index'
+    },
 
-  '/logout' : {
-    controller : 'auth',
-    action     : 'logout'
-  },
+    '/logout': {
+        controller: 'auth',
+        action: 'logout'
+    },
 
 
-  // The Playlist Controller
-  'get /playlist/:id': {
-    controller: 'playlist',
-    action: 'find'
-  },
-  'post /playlist': {
-    controller: 'playlist',
-    action: 'create'
-  },
-  'put /playlist/:id': {
-    controller: 'playlist',
-    action: 'update'
-  },
-  'delete /playlist/:id': {
-    controller: 'playlist',
-    action: 'destroy'
-  },
-  'get /playlist': {
-    controller: 'playlist',
-    action: 'index'
-  },
+    // The Playlist Controller
+    'get /playlist/:id': {
+        controller: 'playlist',
+        action: 'find'
+    },
+    'post /playlist': {
+        controller: 'playlist',
+        action: 'create'
+    },
+    'put /playlist/:id': {
+        controller: 'playlist',
+        action: 'update'
+    },
+    'delete /playlist/:id': {
+        controller: 'playlist',
+        action: 'destroy'
+    },
+    'get /playlist': {
+        controller: 'playlist',
+        action: 'index'
+    },
 
-  /**
-   * People controller actions.
-   */
-  'get /people': {
-    controller: 'people',
-    action: 'index'
-  },
-  'get /people/:id': {
-    controller: 'people',
-    action: 'find'
-  }
+    /**
+     * People controller actions.
+     */
+    'get /people': {
+        controller: 'people',
+        action: 'index'
+    },
+    'get /people/:id': {
+        controller: 'people',
+        action: 'find'
+    },
 
+    /**
+     * Song Search controller actions.
+     */
+    'get /search/songs': {
+        controller: 'songsearch',
+        action: 'index'
+    }
 };
 
