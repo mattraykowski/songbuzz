@@ -42,14 +42,13 @@ songbuzzApp.directive('ytSelect', ['PlayerService', function (PlayerService) {
                     }
 
                     if(found) {
-                        markup += "<span class='badge'>In Playlist</span></td>";
+                        markup += "<br/><span class='badge'>In Playlist</span></td>";
                     } else {
                         markup += "</td>";
                     }
 
                     markup += "</tr>";
                     markup += "</table>";
-                    console.log(markup);
                     return markup;
                 },
                 formatSelection: function (song) {

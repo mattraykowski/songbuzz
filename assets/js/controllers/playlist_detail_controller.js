@@ -48,30 +48,6 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
         };
         $scope.initialFetch();
 
-
-        /**
-         * Takes a video entry from the YouTube Search API and formats it to
-         * the SongBuzz internal format.
-         *
-         * @param vid {Object} YouTube Video Search Result (single)
-         * @returns {{title: String, viewCount: number, videoId: String, thumbUrl: String}}
-         */
-        $scope.formatYtSong = function (vid) {
-            var title = vid.snippet.title;
-            var viewCount = 0;
-            var videoId = vid.id.videoId;
-            var thumbUrl = vid.snippet.thumbnails.default.url;
-
-            var entry = {
-                title: title,
-                viewCount: viewCount,
-                videoId: videoId,
-                thumbUrl: thumbUrl
-            };
-
-            return entry;
-        };
-
         /**
          * Adds the currently selected song from the search component to the
          * end of the currently selected playlist. It then broadcasts 'ytSelectSongAdded'
@@ -140,6 +116,7 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
          * @param ui {Object} jQuery UI object
          */
         $scope.onPlaylistSorted = function (e, ui) {
+            console.log($scope.playlist);
             $scope.playlist.put();
         };
 

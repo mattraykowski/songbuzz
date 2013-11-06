@@ -12,7 +12,7 @@ songbuzzApp.factory('PlaylistRestService', function (Restangular) {
          * @return {Object} Restangular object
          */
         get: function(id) {
-            return Restangular.one(this.basePath, id).getList();
+            return Restangular.one(this.basePath, id).get();
         },
 
         getAll: function() {
