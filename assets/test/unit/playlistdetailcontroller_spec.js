@@ -75,7 +75,15 @@ describe("PlaylistDetailController", function () {
         });
 
         it("should initialize the playlist songs array if not defined.", function () {
-            // TODO: implement this test.
+            // explicitly define playlists without the 'songs' array.
+            scope.playlist = {
+                put: function() {}
+            };
+            scope.ytSelectVideo = sampleYouTubeAPISongEntry;
+
+            expect(scope.playlist.songs).toBeUndefined();
+            scope.doAddSelectedSong();
+            expect(scope.playlist.songs.length).toBe(1);
         });
 
         it("should not do anything if ytSelectVideo isn't in the scope", function () {
