@@ -1,5 +1,5 @@
 'use strict';
-  
+
 var songbuzzApp = angular.module('songbuzz', ['ngRoute', 'restangular', 'ui.sortable']);
 
 songbuzzApp.config(['$routeProvider', '$locationProvider', 'RestangularProvider', function($routeProvider, $locationProvider, RestangularProvider) {
@@ -25,11 +25,14 @@ songbuzzApp.config(['$routeProvider', '$locationProvider', 'RestangularProvider'
 
 // Broadcast the YouTube event to the PlayerService.
 window.onYouTubeIframeAPIReady = function() {
-    var scope = angular.element(document).scope();
-    if(scope == undefined) {
-        console.log("Angular wasn't ready in time for YouTube.");
-    } else {
-        scope.$broadcast('ytPlayerAPIReady');
+    var checkAngularReady = function() {
+        var scope = angular.element(document).scope();
+        if(scope == undefined) {
+            console.log("Angular wasn't ready in time for YouTube.");
+            setTimeout(checkAngularReady, 250);
+        } else {
+            scope.$broadcast('ytPlayerAPIReady');
+        }
     }
 }
 
