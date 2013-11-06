@@ -1,6 +1,6 @@
 'use strict';
 
-songbuzzApp.directive('ytSelect', function () {
+songbuzzApp.directive('ytSelect', ['PlayerService', function (PlayerService) {
     return {
         restrict: "A",
         link: function (scope, element, attrs) {
@@ -9,8 +9,8 @@ songbuzzApp.directive('ytSelect', function () {
                 placeholder: "Search for music...",
                 minimumInputLength: 3,
                 allowClear: true,
+                id: function(song) { return song.videoId; },
                 ajax: {
-                    //url: "https://gdata.youtube.com/feeds/api/videos",
                     url: "/search/songs",
                     dataType: "json",
                     quietMillis: 100,
@@ -29,9 +29,27 @@ songbuzzApp.directive('ytSelect', function () {
                     var markup = "<table>";
                     markup += "<tr>";
                     markup += "<td><img src=\"" + song.thumbUrl + "\"></td>";
-                    markup += "<td>" + song.title + "</td>";
+                    markup += "<td>" + song.title;
+
+                    // Determine if the song is already in the current playlist.
+                    var found = false;
+                    for(var i= 0, len=PlayerService.currentPlaylist.songs.length ; i<len ; i++) {
+                        var s = PlayerService.currentPlaylist.songs[i];
+                        if(song.videoId == s.videoId) {
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if(found) {
+                        markup += "<span class='badge'>In Playlist</span></td>";
+                    } else {
+                        markup += "</td>";
+                    }
+
                     markup += "</tr>";
                     markup += "</table>";
+                    console.log(markup);
                     return markup;
                 },
                 formatSelection: function (song) {
@@ -58,4 +76,4 @@ songbuzzApp.directive('ytSelect', function () {
             });
         }
     };
-});
+}]);
