@@ -91,7 +91,10 @@ songbuzzApp.factory('PlayerService', function ($rootScope) {
             var injector = angular.element(document).injector();
             var playerService = injector.get('PlayerService');
             playerService.currentPlayerState = event.data;
-            $rootScope.$broadcast('ytPlayerStateChanged');
+            $rootScope.$broadcast('ytPlayerStateChanged', playerService.currentSong, playerService.currentPlayerState);
+//            if(event.data == playerService.PlayerState.ENDED) {
+//                $rootScope.$broadcast('song_ended', playerService.currentSong);
+//            }
         },
 
         // PLAYER VCR CONTROLS
