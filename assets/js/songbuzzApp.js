@@ -34,6 +34,7 @@ window.onYouTubeIframeAPIReady = function() {
             scope.$broadcast('ytPlayerAPIReady');
         }
     }
+    checkAngularReady();
 }
 
 var tag = document.createElement('script');
