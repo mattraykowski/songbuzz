@@ -1,6 +1,6 @@
+'use strict';
+
 describe("PlaylistRestService", function() {
-    var scope;
-    var $controller;
     var rootScope;
     var PlaylistRestService;
 
@@ -8,7 +8,6 @@ describe("PlaylistRestService", function() {
     beforeEach(inject(function(_$rootScope_, _PlaylistRestService_) {
         PlaylistRestService = _PlaylistRestService_;
         rootScope = _$rootScope_;
-        //httpBackend = _$httpBackend_;
     }));
 
     describe("get", function() {
