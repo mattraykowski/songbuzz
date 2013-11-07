@@ -19,6 +19,7 @@ module.exports = function(config) {
       'assets/js/app.js',
       'assets/components/jquery/jquery.js',
       'assets/components/bootstrap/dist/js/bootstrap.js',
+      'assets/components/bootbox/bootbox.js',
       'assets/components/jquery-ui/ui/jquery-ui.js',
       'assets/components/select2/select2.js',
       'assets/components/lodash/lodash.js',

@@ -40,22 +40,36 @@ describe("PlaylistListController", function() {
     });
 
     describe("deletePlaylist", function() {
-        it("remove the playlist via REST", function() {
+        var toDeletePlaylist;
+
+        beforeEach(function() {
             // Mock up the sample playlists and select one to delete.
             scope.playlists = samplePlaylists;
-            var toDeletePlaylist = samplePlaylists[0];
+            toDeletePlaylist = samplePlaylists[0];
+
+            // We'll need to spy on bootbox to override its confirm method.
+            spyOn(bootbox, 'confirm').andCallFake(function(msg,cb) { cb(true); });
 
             // Catch the call to Restangular remove.
             spyOn(toDeletePlaylist, 'remove').andReturn({ then: function(cb) { cb(); } });
+
             // Spy on the updatePlaylists method - the callback should request an update.
             spyOn(scope, 'updatePlaylists');
+        });
 
+        it("should remove the playlist via 'remove'", function() {
             scope.deletePlaylist(toDeletePlaylist);
 
-            // fix this expectation. It should match but does not, even though the code works.
             expect(toDeletePlaylist.remove).toHaveBeenCalled();
             expect(scope.updatePlaylists).toHaveBeenCalled();
         });
+
+        it("should redirect you to the base playlists if your current playlist was deleted", inject(function($location) {
+            PlayerService.currentPlaylist = toDeletePlaylist;
+
+            scope.deletePlaylist(toDeletePlaylist);
+            expect($location.path()).toBe('/playlists');
+        }));
     });
 
     describe("changePlaylist", function(){

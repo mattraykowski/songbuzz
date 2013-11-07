@@ -21,9 +21,16 @@ songbuzzApp.controller('PlaylistListController', ['$scope', '$timeout', '$locati
         };
 
         $scope.deletePlaylist = function (playlist) {
-            playlist.remove().then(function () {
-                $scope.updatePlaylists();
-            });
+            bootbox.confirm("Are you sure you want to delete this playlist?", function (result) {
+                if (result === true) {
+                    playlist.remove().then(function () {
+                        $scope.updatePlaylists();
+                        if(playlist.id == PlayerService.currentPlaylist.id) {
+                            $location.path('/playlists');
+                        }
+                    });
+                }
+            })
         };
 
         $scope.changePlaylist = function (idx) {
