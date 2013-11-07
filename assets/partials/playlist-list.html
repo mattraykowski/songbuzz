@@ -9,8 +9,7 @@
         <tbody>
             <tr ng-repeat="playlist in playlists | filter:query" ng-mouseenter="showRemovePlaylistButton = $index" ng-mouseleave="showRemovePlaylistButton = -1">
                 <td>
-
-                    <a href="#/playlists/{{playlist.id}}" ng-click="changePlaylist($index)">{{playlist.title}}</a>
+                    <a href="#/playlists/{{playlist.id}}" ng-click="changePlaylist($index)">{{playlist.title}}</a> <span ng-show="isPlaying(playlist.id)" class="badge">Playing</span>
                 </td>
                 <td width="48px">
                     <button class="btn btn-xs btn-danger" ng-show="showRemovePlaylistButton == $index" ng-click="deletePlaylist(playlist)">
