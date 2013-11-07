@@ -78,7 +78,8 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
          *
          * @param idx {Number} Index location of the song to remove.
          */
-        $scope.removeSong = function (idx) {
+        $scope.removeSong = function (song) {
+            var idx = $scope.findSongInPlaylist(song.videoId);
             $scope.playlist.songs.splice(idx, 1);
             $scope.playlist.put();
         };
@@ -105,8 +106,17 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
             return duration;
         };
 
-        $scope.playSong = function (songIndex) {
-            PlayerService.playIndex(songIndex);
+        $scope.findSongInPlaylist = function(videoId) {
+            for(var i = 0, len=$scope.playlist.songs.length ; i < len ; i++) {
+                if($scope.playlist.songs[i].videoId == videoId) {
+                    return i;
+                }
+            }
+            return 0;
+        };
+
+        $scope.playSong = function (song) {
+            PlayerService.playIndex($scope.findSongInPlaylist(song.videoId));
         };
 
         /**
@@ -116,8 +126,14 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
          * @param ui {Object} jQuery UI object
          */
         $scope.onPlaylistSorted = function (e, ui) {
-            console.log($scope.playlist);
-            $scope.playlist.put();
+            if($scope.songFilter != undefined && $scope.songFilter.length != 0) {
+                if(ui) {
+                    ui.item.parent().sortable('cancel');
+                }
+            } else {
+                $scope.playlist.put();
+            }
+
         };
 
         /**
@@ -127,7 +143,7 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
          * @returns {boolean} true if the current song and the parameter match.
          */
         $scope.isPlayingSong = function(song) {
-            if(PlayerService.currentSong == song) {
+            if(PlayerService.currentSong.videoId == song.videoId) {
                 return true;
             }
 

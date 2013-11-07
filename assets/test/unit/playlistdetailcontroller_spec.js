@@ -25,15 +25,95 @@ describe("PlaylistDetailController", function () {
         });
     });
 
-    describe("removeSong", function () {
-        it("should remove a song based on its array index", function () {
-            // TODO: implement this.
+    describe("findSongInPlaylist", function() {
+        beforeEach(function() {
+            scope.playlist = {
+                songs: [
+                    { videoId: '1234'},
+                    { videoId: '5678'}
+                ]
+            };
         });
+
+        it("should find a song based on its videoId and return its index", function(){
+            expect(scope.findSongInPlaylist(scope.playlist.songs[1].videoId)).toBe(1);
+        });
+
+        it("should return the the initial index if the song is not found", function() {
+            expect(scope.findSongInPlaylist(scope.playlist.songs[1].videoId + "1")).toBe(0);
+        })
     });
+
+    describe("removeSong", function () {
+        beforeEach(function() {
+            scope.playlist = {
+                put: function() {},
+                songs: [
+                    { videoId: '1234'},
+                    { videoId: '5678'}
+                ]
+            };
+        });
+
+        it("should remove a song based on its videoId", function () {
+            spyOn(scope.playlist.songs, 'splice');
+            scope.removeSong(scope.playlist.songs[1]);
+
+            expect(scope.playlist.songs.splice).toHaveBeenCalledWith(1,1);
+        });
+
+        it("should save the playlist", function() {
+            spyOn(scope.playlist, 'put');
+
+            scope.removeSong(scope.playlist.songs[0]);
+            expect(scope.playlist.put).toHaveBeenCalled();
+        })
+    });
+
+    describe("playSong", function() {
+        beforeEach(function() {
+            spyOn(PlayerService,'playIndex');
+            scope.playlist = {
+                songs: [
+                    { videoId: '1234'},
+                    { videoId: '5678'}
+                ]
+            };
+        });
+
+        it("should play the song by index", function() {
+            scope.playSong({videoId: scope.playlist.songs[1].videoId});
+            expect(PlayerService.playIndex).toHaveBeenCalledWith(1);
+        });
+    })
 
     describe("onPlaylistSorted", function () {
         it("should save a playlist", function () {
-            // TODO: implement this.
+            scope.songFilter = "";
+            scope.playlist = {
+                put: function () {}
+            };
+            spyOn(scope.playlist, 'put');
+
+            scope.onPlaylistSorted(null, null);
+            expect(scope.playlist.put).toHaveBeenCalled();
+        });
+
+        it("should cancel sorting if the list is filtered", function() {
+            scope.playlist = {
+                put: function () {}
+            };
+            var ui = {
+                item: {
+                    sortable: function() { },
+                    parent: function() { return { sortable: this.sortable } }
+                }
+            };
+            spyOn(ui.item, 'sortable');
+            scope.songFilter = "something";
+
+            scope.onPlaylistSorted(null, ui);
+            expect(ui.item.sortable).toHaveBeenCalled();
         });
     });
 
