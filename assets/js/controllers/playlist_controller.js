@@ -30,7 +30,7 @@ songbuzzApp.controller('PlaylistListController', ['$scope', '$timeout', '$locati
                         }
                     });
                 }
-            })
+            });
         };
 
         $scope.changePlaylist = function (idx) {

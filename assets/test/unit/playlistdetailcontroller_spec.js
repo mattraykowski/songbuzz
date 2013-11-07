@@ -53,6 +53,9 @@ describe("PlaylistDetailController", function () {
                     { videoId: '5678'}
                 ]
             };
+
+            // We'll need to spy on bootbox to override its confirm method.
+            spyOn(bootbox, 'confirm').andCallFake(function(msg,cb) { cb(true); });
         });
 
         it("should remove a song based on its videoId", function () {

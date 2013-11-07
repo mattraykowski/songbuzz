@@ -79,9 +79,13 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
          * @param idx {Number} Index location of the song to remove.
          */
         $scope.removeSong = function (song) {
-            var idx = $scope.findSongInPlaylist(song.videoId);
-            $scope.playlist.songs.splice(idx, 1);
-            $scope.playlist.put();
+            bootbox.confirm("Are you sure you want to remove this song?", function (result) {
+                if (result === true) {
+                    var idx = $scope.findSongInPlaylist(song.videoId);
+                    $scope.playlist.songs.splice(idx, 1);
+                    $scope.playlist.put();
+                }
+            });
         };
 
         /**
