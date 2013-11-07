@@ -255,18 +255,9 @@ describe("PlayerService", function() {
 
             it("should default the songs object to an empty array if not defined", function() {
                 spyOn(rootScope, '$broadcast');
-                // We need a playlists with no songs
-                expect(samplePlaylists[1].songs).toBeUndefined();
                 PlayerService.changePlaylist(samplePlaylists[1]);
                 expect(samplePlaylists[1].songs).toBeDefined();
             });
-
-//            it("should broadcast the changePlaylist event", function() {
-//                spyOn(rootScope, '$broadcast');
-//
-//                PlayerService.changePlaylist(samplePlaylists[0]);
-//                expect(rootScope.$broadcast).toHaveBeenCalledWith('changePlaylist');
-//            });
         });
 
         describe("getPlayerDuration", function() {
