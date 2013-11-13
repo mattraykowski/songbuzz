@@ -1,4 +1,4 @@
-describe("PlayerController", function () {
+describe("PeopleController", function () {
     var scope;
     var samplePeople;
     var PeopleRestService;
