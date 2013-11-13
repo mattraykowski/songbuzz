@@ -4,14 +4,13 @@ describe("PlaylistDetailController", function () {
     var playerCtrl;
 
     beforeEach(module('songbuzz'));
-    beforeEach(inject(function (_$rootScope_, _$controller_, _$timeout_, _$routeParams_, _PlayerService_, _PlaylistRestService_) {
+    beforeEach(inject(function (_$rootScope_, _$controller_, _$routeParams_, _PlayerService_, _PlaylistRestService_) {
         scope = _$rootScope_.$new();
         $controller = _$controller_;
         PlayerService = _PlayerService_;
 
         playlistDetailCtrl = $controller('PlaylistDetailController', {
             $scope: scope,
-            $timeout: _$timeout_,
             $routeParams: _$routeParams_,
             PlayerService: _PlayerService_,
             PlaylistRestService: _PlaylistRestService_
@@ -121,7 +120,7 @@ describe("PlaylistDetailController", function () {
     });
 
     describe("changePlaylist event handler", function () {
-        it("should receive 'changePlaylist' call the fetch method", inject(function ($rootScope, $timeout) {
+        it("should receive 'changePlaylist' call the fetch method", inject(function ($rootScope) {
             spyOn(scope, 'fetchPlaylist');
             PlayerService.currentPlaylist = samplePlaylists[0];
 

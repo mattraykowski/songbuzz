@@ -1,7 +1,7 @@
 'use strict';
 
-songbuzzApp.controller('PlaylistListController', ['$scope', '$timeout', '$location', 'PlayerService', 'PlaylistRestService',
-    function ($scope, $timeout, $location, PlayerService, PlaylistRestService) {
+songbuzzApp.controller('PlaylistListController', ['$scope', '$location', 'PlayerService', 'PlaylistRestService',
+    function ($scope, $location, PlayerService, PlaylistRestService) {
         $scope.playlists = [];
 
         $scope.updatePlaylists = function () {

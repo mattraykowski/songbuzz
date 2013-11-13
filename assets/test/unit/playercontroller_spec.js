@@ -4,15 +4,16 @@ describe("PlayerController", function() {
 	var playerCtrl;
 
 	beforeEach(module('songbuzz'));
-	beforeEach(inject(function(_$rootScope_, _$controller_, _$timeout_, _PlayerService_) {
+	beforeEach(inject(function(_$rootScope_, _$controller_, _$interval_, _PlayerService_) {
 		scope = _$rootScope_.$new();
 		$controller = _$controller_;
         PlayerService = _PlayerService_;
+        $interval = _$interval_;
 
 		playerCtrl = $controller('PlayerController', {
 			$rootScope: _$rootScope_,
 			$scope: scope,
-			$timeout: _$timeout_,
+			$interval: _$interval_,
 			PlayerService: _PlayerService_
 		});
 	}));
@@ -28,10 +29,10 @@ describe("PlayerController", function() {
             }));
         });
         describe("when 'ytPlayerStateChanged' is emitted", function() {
-            it("should toggle the active flags when the player ends and request the next song", inject(function($rootScope, $timeout) {
+            it("should toggle the active flags when the player ends and request the next song", inject(function($rootScope) {
                 // Set up spy.
                 spyOn(scope, 'safeApply');
-                spyOn($timeout, 'cancel');
+                spyOn($interval, 'cancel');
                 spyOn(PlayerService.PlayerState, 'stateToString').andReturn('ended');
                 spyOn(PlayerService, 'playNext');
 
@@ -48,7 +49,7 @@ describe("PlayerController", function() {
                 expect(PlayerService.PlayerState.stateToString).toHaveBeenCalledWith(0);//.andReturn('ended');
 
                 // And then cancel the progress bar timer.
-                expect($timeout.cancel).toHaveBeenCalled();
+                expect($interval.cancel).toHaveBeenCalled();
 
                 // Next it should request the next song to be played.
                 // Any further reactions should result from future state changes.
@@ -60,10 +61,10 @@ describe("PlayerController", function() {
 
             }));
 
-            it("should toggle the active flags when the player pauses", inject(function($rootScope, $timeout) {
+            it("should toggle the active flags when the player pauses", inject(function($rootScope) {
                 // Set up spy.
                 spyOn(scope, 'safeApply');
-                spyOn($timeout, 'cancel');
+                spyOn($interval, 'cancel');
                 spyOn(PlayerService.PlayerState, 'stateToString').andReturn('paused');
 
                 // When playing...
@@ -79,7 +80,7 @@ describe("PlayerController", function() {
                 expect(PlayerService.PlayerState.stateToString).toHaveBeenCalledWith(2);//.andReturn('ended');
 
                 // And then cancel the progress bar timer.
-                expect($timeout.cancel).toHaveBeenCalled();
+                expect($interval.cancel).toHaveBeenCalled();
 
                 // And finally toggle the flags for the play/pause buttons.
                 expect(scope.playState).toBeFalsy();
@@ -90,7 +91,7 @@ describe("PlayerController", function() {
             it("should toggle the active flags and enable the progress timer when the player starts playing", inject(function($rootScope) {
                 // Set up spy.
                 spyOn(scope, 'safeApply');
-                spyOn(scope, 'updateSongProgress');
+                spyOn(scope, 'startSongProgressJob');
                 spyOn(PlayerService.PlayerState, 'stateToString').andReturn('playing');
 
 
@@ -107,7 +108,7 @@ describe("PlayerController", function() {
                 expect(PlayerService.PlayerState.stateToString).toHaveBeenCalledWith(1);
 
                 // And then cancel the progress bar timer.
-                expect(scope.updateSongProgress).toHaveBeenCalled();
+                expect(scope.startSongProgressJob).toHaveBeenCalled();
 
                 // And finally toggle the flags for the play/pause buttons.
                 expect(scope.playState).toBeTruthy();
@@ -120,11 +121,7 @@ describe("PlayerController", function() {
     describe("helper functions", function() {
         /** @todo make sure this is fully tested. */
         describe("updateSongProgress", function() {
-            it("should continuously update the progress percentage", inject(function($rootScope, $timeout) {
-                // Set up spy.
-                //spyOn(scope, '$timeout');
-                //expect(angular.$timeout).toHaveBeenCalled();
-
+            it("should continuously update the progress percentage", inject(function($rootScope) {
                 spyOn(scope, 'getCurrentDuration').andReturn(500);
                 spyOn(scope, 'getTotalDuration').andReturn(1000);
 
@@ -132,7 +129,7 @@ describe("PlayerController", function() {
 
                 expect(scope.progress).toBe(50);
 
-                $timeout.cancel(scope.songProgressTimer);
+                $interval.cancel(scope.songProgressTimer);
             }));
         });
 

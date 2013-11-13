@@ -2,11 +2,10 @@
 
 songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
     '$scope',
-    '$timeout',
     '$routeParams',
     'PlayerService',
     'PlaylistRestService',
-    function ($rootScope, $scope, $timeout, $routeParams, PlayerService, PlaylistRestService) {
+    function ($rootScope, $scope, $routeParams, PlayerService, PlaylistRestService) {
         $scope.playlistId = $routeParams.playlistId;
         $scope.searchResults = '';
         $scope.playingSong = {};

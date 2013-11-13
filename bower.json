@@ -2,9 +2,9 @@
     "name": "songbuzz",
     "version": "0.0.1",
     "dependencies": {
-        "angular": "1.2.0-rc.2",
-        "angular-mocks": "1.2.0-rc.2",
-        "angular-route": "1.2.0-rc.2",
+        "angular": "1.2.0",
+        "angular-mocks": "1.2.0",
+        "angular-route": "1.2.0",
         "angular-ui-sortable": "0.0.1",
         "bootbox": "4.1.0",
         "bootstrap": "3.0.0",

@@ -4,7 +4,7 @@ describe("PlaylistListController", function() {
     var PlaylistRestService;
 
 	beforeEach(module('songbuzz'));
-	beforeEach(inject(function(_$rootScope_, _$controller_, _$timeout_, _$location_, _PlaylistRestService_) {
+	beforeEach(inject(function(_$rootScope_, _$controller_, _$location_, _PlaylistRestService_) {
         var rootScope = _$rootScope_;
 		scope = _$rootScope_.$new();
 		$controller = _$controller_;
@@ -12,7 +12,6 @@ describe("PlaylistListController", function() {
 
 		var playlistListCtrl = $controller('PlaylistListController', {
 			$scope: scope,
-			$timeout: _$timeout_,
             $location: _$location_,
 			PlayerService: PlayerService,
             PlaylistRestService: _PlaylistRestService_

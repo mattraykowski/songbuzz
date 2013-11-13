@@ -1,16 +1,16 @@
 'use strict';
 
-songbuzzApp.controller('PlayerController', ['$scope', '$timeout', 'PlayerService',
+songbuzzApp.controller('PlayerController', ['$scope', '$interval', 'PlayerService',
 
     /** @constructor
      *
      * This is the PlayerController.
      *
      * @param $scope
-     * @param $timeout
+     * @param $interval {object} Angular setInterval wrapper service.
      * @param PlayerService
      */
-    function ($scope, $timeout, PlayerService) {
+    function ($scope, $interval, PlayerService) {
         $scope.playerService = PlayerService; // save a reference for expressions and children
         $scope.playerStateMsg = PlayerService.PlayerState.stateToString(PlayerService.currentPlayerState);
 
@@ -124,9 +124,15 @@ songbuzzApp.controller('PlayerController', ['$scope', '$timeout', 'PlayerService
          * in percentage.
          */
         $scope.updateSongProgress = function () {
-            $scope.songProgressTimer = $timeout($scope.updateSongProgress, 250);
             $scope.progress = ($scope.getCurrentDuration() / $scope.getTotalDuration()) * 100;
         };
+
+        $scope.startSongProgressJob = function() {
+            $scope.songProgressTimer = $interval($scope.updateSongProgress, 250);
+        };
+
+        $scope.startSongProgressJob();
+
 
         /*********************************
          *   Event broadcast handlers.   *
@@ -142,15 +148,15 @@ songbuzzApp.controller('PlayerController', ['$scope', '$timeout', 'PlayerService
                 case PlayerService.PlayerState.PLAYING:
                     $scope.playState = true;
                     $scope.pauseState = false;
-                    $scope.updateSongProgress();
+                    $scope.startSongProgressJob();
                     break;
                 case PlayerService.PlayerState.PAUSED:
                     $scope.playState = false;
                     $scope.pauseState = true;
-                    $timeout.cancel($scope.songProgressTimer);
+                    $interval.cancel($scope.songProgressTimer);
                     break;
                 case PlayerService.PlayerState.ENDED:
-                    $timeout.cancel($scope.songProgressTimer);
+                    $interval.cancel($scope.songProgressTimer);
                     $scope.progress = 0;
                     PlayerService.playNext();
                 default:
