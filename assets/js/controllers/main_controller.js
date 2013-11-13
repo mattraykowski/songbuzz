@@ -12,6 +12,7 @@ songbuzzApp.controller('MainController', ['$scope', '$timeout', 'Restangular', '
          * @param message {string} A text string containing a message to display for users.
          */
         $scope.sendMessage = function(message) {
+            console.log(message + "MESSSARGE")
             noty({
                 text: message,
                 layout: 'bottomRight',
@@ -19,16 +20,16 @@ songbuzzApp.controller('MainController', ['$scope', '$timeout', 'Restangular', '
             });
         }
 
-        $scope.pullAuthenticationStatus = function () {
-            $scope.pullAuthenticationStatusTimer = $timeout($scope.pullAuthenticationStatus, 60000);
-            Restangular.all("auth").customGET("authenticated").then(function (status) {
-                $scope.loggedIn = status.authenticated;
-                $scope.currentUser = status.current;
-            });
-        }
-        $scope.pullAuthenticationStatus();
+//        $scope.pullAuthenticationStatus = function () {
+//            $scope.pullAuthenticationStatusTimer = $timeout($scope.pullAuthenticationStatus, 60000);
+//            Restangular.all("auth").customGET("authenticated").then(function (status) {
+//                $scope.loggedIn = status.authenticated;
+//                $scope.currentUser = status.current;
+//            });
+//        }
+//        $scope.pullAuthenticationStatus();
+        $scope.playerStateChangeHandler = function (event, song, playerState) {
 
-        $scope.$on('ytPlayerStateChanged', function (event, song, playerState) {
             switch(playerState) {
                 case PlayerService.PlayerState.ENDED:
                     $scope.sendMessage("Playback Ended: <br/> " + song.title);
@@ -37,5 +38,9 @@ songbuzzApp.controller('MainController', ['$scope', '$timeout', 'Restangular', '
                     $scope.sendMessage("Now Playing: " + song.title);
                     break;
             }
+        };
+
+        $scope.$on('ytPlayerStateChanged', function(event, song, playerState) {
+            $scope.playerStateChangeHandler(event, song, playerState);
         });
     }]);
