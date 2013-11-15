@@ -1,7 +1,7 @@
 'use strict';
 
-songbuzzApp.controller('MainController', ['$scope', '$timeout', 'Restangular', 'PlayerService',
-    function ($scope, $timeout, Restangular, PlayerService) {
+songbuzzApp.controller('MainController', ['$scope', 'Restangular', 'PlayerService',
+    function ($scope, Restangular, PlayerService) {
         $scope.loggedIn = false;
         $scope.currentUser = null;
         $scope.pullAuthenticationStatusTimer = null;
@@ -18,16 +18,16 @@ songbuzzApp.controller('MainController', ['$scope', '$timeout', 'Restangular', '
                 layout: 'bottomRight',
                 timeout: 1500
             });
-        }
+        };
 
-//        $scope.pullAuthenticationStatus = function () {
-//            $scope.pullAuthenticationStatusTimer = $timeout($scope.pullAuthenticationStatus, 60000);
-//            Restangular.all("auth").customGET("authenticated").then(function (status) {
-//                $scope.loggedIn = status.authenticated;
-//                $scope.currentUser = status.current;
-//            });
-//        }
-//        $scope.pullAuthenticationStatus();
+        $scope.pullAuthenticationStatus = function () {
+            Restangular.all("auth").customGET("authenticated").then(function (status) {
+                $scope.loggedIn = status.authenticated;
+                $scope.currentUser = status.current;
+            });
+        };
+        $scope.pullAuthenticationStatus()
+
         $scope.playerStateChangeHandler = function (event, song, playerState) {
 
             switch(playerState) {
