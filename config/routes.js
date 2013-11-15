@@ -76,6 +76,10 @@ module.exports.routes = {
         controller: 'people',
         action: 'find'
     },
+    'get /people/:id/playlists': {
+        controller: 'people',
+        action: 'playlists'
+    },
 
     /**
      * Song Search controller actions.

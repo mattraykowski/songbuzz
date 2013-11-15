@@ -2,9 +2,10 @@ describe("PeopleController", function () {
     var scope;
     var samplePeople;
     var PeopleRestService;
+    var peopleCtrl;
 
     beforeEach(module('songbuzz'));
-    beforeEach(inject(function (_$rootScope_, _$controller_, _PeopleRestService_) {
+    beforeEach(inject(function (_$rootScope_, _$controller_, _$routeParams_, _PeopleRestService_) {
         scope = _$rootScope_.$new();
         $controller = _$controller_;
         PeopleRestService = _PeopleRestService_;
@@ -12,6 +13,7 @@ describe("PeopleController", function () {
         peopleCtrl = $controller('PeopleController', {
             $rootScope: _$rootScope_,
             $scope: scope,
+            $routeParams: _$routeParams_,
             PeopleRestService: _PeopleRestService_
         });
 
@@ -39,7 +41,20 @@ describe("PeopleController", function () {
 
             scope.fetchPeople();
             expect(PeopleRestService.getAll).toHaveBeenCalled();
+        });
+    });
+
+    describe("when a personId is provided", function() {
+        beforeEach(function() {
+            scope.personId = samplePeople[0].id;
+        });
+
+        it("should get the person and assign them to the scope", function() {
+            spyOn(PeopleRestService, 'get').andReturn(getThenObject(samplePeople[0]));
+
+            scope.fetchPerson();
+            expect(PeopleRestService.get).toHaveBeenCalled();
         })
-    })
+    });
 
 });

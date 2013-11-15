@@ -19,8 +19,8 @@ songbuzzApp.factory('PeopleRestService', function (Restangular) {
             return Restangular.all(this.basePath).getList(options);
         },
 
-        getByUser: function() {
-            return Restangular.all(this.basePath);
+        getPlaylistsByUser: function(id) {
+            return Restangular.all(this.basePath + "/" + id + "/playlists").getList();
         }
 
     };

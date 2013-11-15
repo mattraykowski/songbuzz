@@ -1,50 +1,51 @@
 <div class="row">
-  <div class="col-12">
+    <div class="col-12">
 
-<h3>SongBuzzers</h3>
+        <h3>SongBuzzer: {{person.name}}</h3>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>&nbsp;</th> <!-- image thumbnail -->
-            <th>Buzzer</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="person in people">
-            <td><img src="{{person.picture}}" width="48" heigth="48"/></td>
-            <td>{{person.name}}</td>
-            <td>
-                <button class="btn btn-sm btn-success" ng-click="addFriend($index)"><i class="glyphicon glyphicon-plus"></i></button>
-            </td>
-        </tr>
-    </tbody>
-    <tfoot>
-        <tr>&nbsp;
-        </tr>
-    </tfoot>
-</table>
+        <div class="row">
+            <div class="col-lg-4">
+                <table class="table table-striped">
+                    <thead>
+                    <th>Playlists</th>
+                    <th width="48px">&nbsp;</th>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="playlist in playlists">
+                        <td><a ng-click="choosePlaylist(playlist)">{{playlist.title}}</a></td>
+                        <td><a href="#/playlists/{{playlist.id}}">Play</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
 
-<!--
-<div class="well">
-    <p>Add Song</p>
+            <div class="col-lg-8">
+                <div ng-show="currentPlaylist == null">
+                    <h4>Choose a playlist</h4>
+                </div>
 
-    <div>
-        <yt-autocomplete selection="selectedSong" list="doGetAutocomplete"></yt-autocomplete>
-        <span>
-          <button class="btn btn-success btn-sm" ng-click="doAddSelectedSong()" type="button"><i class="glyphicon glyphicon-plus"></i></button>
-        </span>
+                <div ng-show="currentPlaylist != null">
+                    <h4>{{currentPlaylist.title}}</h4>
+                    <table class="table table-striped">
+                        <thead>
+                            <th>&nbsp;</th>
+                            <th>Song</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="song in currentPlaylist.songs">
+                                <td><img src="{{song.thumbUrl}}" width="48" heigth="48"/></td>
+                                <td>{{song.title}}</td>
+                            </tr>
+                            <tr ng-show="currentPlaylist.songs == undefined || currentPlaylist.songs < 1">
+                                <td colspan="2">{{person.name}} has no songs in this playlist.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
-</div>
- -->
-
-<!-- Disable debug info for now
-<p>Debug Info</p>
-<p>Saerch Terms: {{ytSearchParameter}}</p>
-<p> Search Results:</p>
-<p>{{searchResults}}</p>
-<p>TBD: detail view for {{playlistId}}</p>
-<p></p>
-<p>{{playlist}}</p> -->
-  </div>
 </div>

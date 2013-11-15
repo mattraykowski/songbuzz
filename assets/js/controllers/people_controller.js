@@ -1,9 +1,17 @@
 'use strict';
 
-songbuzzApp.controller('PeopleController', ['$scope', 'PeopleRestService', function ($scope, PeopleRestService) {
+songbuzzApp.controller('PeopleController', ['$scope', '$routeParams', 'PeopleRestService', 'PlaylistRestService', function ($scope, $routeParams, PeopleRestService, PlaylistRestService) {
+    $scope.personId = null;
+    if($routeParams.personId !== undefined) {
+        $scope.personId = $routeParams.personId;
+    }
+
     $scope.peopleLimit = 10;
     $scope.peopleOffset = 0;
     $scope.people = [ ];
+    $scope.playlists = [ ];
+    $scope.person = { };
+    $scope.currentPlaylist = null;
 
     $scope.fetchPeople = function () {
         PeopleRestService.getAll({limit: $scope.peopleLimit, offset: $scope.peopleOffset})
@@ -11,8 +19,34 @@ songbuzzApp.controller('PeopleController', ['$scope', 'PeopleRestService', funct
                 $scope.people = people;
             });
     };
-    $scope.fetchPeople();
+
+    $scope.fetchPerson = function() {
+        PeopleRestService.get($scope.personId).then(function(person) {
+            $scope.person = person;
+
+            PeopleRestService.getPlaylistsByUser($scope.personId).then(function(playlists) {
+                $scope.playlists = playlists;
+            })
+        });
+    };
+
+    $scope.choosePlaylist = function(playlist) {
+        PlaylistRestService.get(playlist.id).then(function(playlistDetail) {
+            $scope.currentPlaylist = playlistDetail;
+        });
+    };
 
     $scope.addFriend = function (index) {
+
+    };
+
+
+    /*
+     * Runtime stuff.
+     */
+    if($scope.personId == null) {
+        $scope.fetchPeople();
+    } else {
+        $scope.fetchPerson();
     }
 }]);
