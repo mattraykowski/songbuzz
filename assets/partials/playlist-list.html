@@ -33,9 +33,9 @@
 
     <form name="addPlaylistForm">
         <div class="input-group">
-            <input ng-model="playlistTitle" placeholder="Enter new playlist name..." class="form-control" ng-required>
+            <input ng-model="playlistTitle" placeholder="Enter new playlist name..." class="form-control" name="plTitle" required>
             <span class="input-group-btn">
-                <button class="btn btn-primary btn-add-playlist" ng-click="addNewPlaylist()" ng-disabled="!playlistTitle.$valid"><i class="glyphicon glyphicon-plus icon-white"></i></button>
+                <button class="btn btn-primary btn-add-playlist" ng-click="addNewPlaylist()" ng-disabled="addPlaylistForm.plTitle.$invalid"><i class="glyphicon glyphicon-plus icon-white"></i></button>
             </span>
         </div>
     </form>
