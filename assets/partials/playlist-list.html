@@ -30,11 +30,13 @@
     </table>
     
     <p>Add Playlist</p>
-    
-    <div class="input-group">
-        <input ng-model="playlistTitle" placeholder="Enter new playlist name..." class="form-control">
-        <span class="input-group-btn">
-            <button class="btn btn-primary" ng-click="addNewPlaylist()"><i class="glyphicon glyphicon-plus icon-white"></i></button>
-        </span>
-    </div>
+
+    <form name="addPlaylistForm">
+        <div class="input-group">
+            <input ng-model="playlistTitle" placeholder="Enter new playlist name..." class="form-control" ng-required>
+            <span class="input-group-btn">
+                <button class="btn btn-primary btn-add-playlist" ng-click="addNewPlaylist()" ng-disabled="!playlistTitle.$valid"><i class="glyphicon glyphicon-plus icon-white"></i></button>
+            </span>
+        </div>
+    </form>
 </div>
