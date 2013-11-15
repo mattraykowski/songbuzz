@@ -8,7 +8,6 @@ songbuzzApp.controller('PeopleController', ['$scope', 'PeopleRestService', funct
     $scope.fetchPeople = function () {
         PeopleRestService.getAll({limit: $scope.peopleLimit, offset: $scope.peopleOffset})
             .then(function (people) {
-                console.log(people);
                 $scope.people = people;
             });
     };

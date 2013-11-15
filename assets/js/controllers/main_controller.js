@@ -12,7 +12,6 @@ songbuzzApp.controller('MainController', ['$scope', 'Restangular', 'PlayerServic
          * @param message {string} A text string containing a message to display for users.
          */
         $scope.sendMessage = function(message) {
-            console.log(message + "MESSSARGE")
             noty({
                 text: message,
                 layout: 'bottomRight',

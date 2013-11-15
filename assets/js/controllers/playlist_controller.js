@@ -16,6 +16,7 @@ songbuzzApp.controller('PlaylistListController', ['$scope', '$location', 'Player
                 .then(function(response) {
                     $scope.updatePlaylists();
                 }, function() {
+                    // TODO gracefully handle errors.
                     console.log("There was an error adding a new playlist.");
                 });
         };

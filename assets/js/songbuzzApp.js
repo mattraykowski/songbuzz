@@ -28,7 +28,6 @@ window.onYouTubeIframeAPIReady = function() {
     var checkAngularReady = function() {
         var scope = angular.element(document).scope();
         if(scope == undefined) {
-            console.log("Angular wasn't ready in time for YouTube.");
             setTimeout(checkAngularReady, 250);
         } else {
             scope.$broadcast('ytPlayerAPIReady');
