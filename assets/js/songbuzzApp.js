@@ -10,7 +10,7 @@ songbuzzApp.config(['$routeProvider', '$locationProvider', 'RestangularProvider'
             templateUrl: "/partials/playlist-detail.html",
             controller: 'PlaylistDetailController'
         }).when("/people", {
-            templateUrl: "/partials/people-list.html",
+            templateUrl: "/partials/people-detail.html",
             controller: "PeopleController"
         }).when("/people/:personId", {
             templateUrl: "/partials/people-detail.html",

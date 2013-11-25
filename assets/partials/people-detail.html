@@ -1,10 +1,45 @@
 <div class="row">
-    <div class="col-12">
+    <div class="col-lg-3">
+
+        <h3>SongBuzzers</h3>
+
+        <div class="row>">
+            <div class="col-12-lg">
+
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <!-- image thumbnail -->
+                        <th>Buzzer</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="person in people">
+                        <td><img src="{{person.picture}}" width="48" heigth="48"/></td>
+                        <td><a href="#/people/{{person.id}}">{{person.name}}</a></td>
+                        <td>
+                            <button class="btn btn-sm btn-success" ng-click="addFriend($index)"><i
+                                    class="glyphicon glyphicon-plus"></i></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>&nbsp;
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-9">
 
         <h3>SongBuzzer: {{person.name}}</h3>
 
         <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-6">
                 <table class="table table-striped">
                     <thead>
                     <th>Playlists</th>
@@ -19,7 +54,7 @@
                 </table>
             </div>
 
-            <div class="col-lg-8">
+            <div class="col-lg-6">
                 <div ng-show="currentPlaylist == null">
                     <h4>Choose a playlist</h4>
                 </div>

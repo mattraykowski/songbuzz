@@ -44,9 +44,8 @@ songbuzzApp.controller('PeopleController', ['$scope', '$routeParams', 'PeopleRes
     /*
      * Runtime stuff.
      */
-    if($scope.personId == null) {
-        $scope.fetchPeople();
-    } else {
+    $scope.fetchPeople();
+    if($scope.personId !== null) {
         $scope.fetchPerson();
     }
 }]);
