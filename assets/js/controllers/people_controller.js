@@ -36,9 +36,15 @@ songbuzzApp.controller('PeopleController', ['$scope', '$routeParams', 'PeopleRes
         });
     };
 
-    $scope.addFriend = function (index) {
+    $scope.addFriend = function (person) {
 
     };
+
+    $scope.choosePerson = function(person) {
+        $scope.personId = person.id;
+
+        $scope.fetchPerson();
+    }
 
 
     /*

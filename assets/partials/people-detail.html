@@ -19,9 +19,9 @@
                     <tbody>
                     <tr ng-repeat="person in people">
                         <td><img src="{{person.picture}}" width="48" heigth="48"/></td>
-                        <td><a href="#/people/{{person.id}}">{{person.name}}</a></td>
+                        <td><a href="" ng-click="choosePerson(person)">{{person.name}}</a></td>
                         <td>
-                            <button class="btn btn-sm btn-success" ng-click="addFriend($index)"><i
+                            <button class="btn btn-sm btn-success" ng-click="addFriend(person)"><i
                                     class="glyphicon glyphicon-plus"></i></button>
                         </td>
                     </tr>

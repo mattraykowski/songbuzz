@@ -57,4 +57,22 @@ describe("PeopleController", function () {
         })
     });
 
+    describe("choosePerson", function() {
+        it("should set the person ID", function() {
+            scope.personId = null;
+
+            scope.choosePerson(samplePeople[0]);
+
+            expect(scope.personId).toBe(samplePeople[0].id);
+        });
+
+        it("should call fetchPerson", function() {
+            spyOn(scope, 'fetchPerson');
+
+            scope.choosePerson(samplePeople[0]);
+
+            expect(scope.fetchPerson).toHaveBeenCalled();
+        })
+    })
+
 });
