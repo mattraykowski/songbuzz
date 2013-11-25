@@ -11,3 +11,12 @@
 * html .ui-autocomplete {
     height: 200px;
 }
+
+.playercontainer {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #d3d3d3;
+}
+
+.pagecontainer {
+    padding-top: 10px;
+}
