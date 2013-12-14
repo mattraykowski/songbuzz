@@ -3,15 +3,15 @@
         <thead>
             <tr>
                 <th>Playlists</th>
-                <th>&nbsp;</th>
+                <th><input ng-model="query" placeholder="filter playlists..."></th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="playlist in playlists | filter:query" ng-mouseenter="showRemovePlaylistButton = $index" ng-mouseleave="showRemovePlaylistButton = -1">
+            <tr ng-repeat="playlist in playlists | filter:query" ng-mouseenter="showRemovePlaylistButton = $index" ng-mouseleave="showRemovePlaylistButton = -1" class="playlist-row">
                 <td>
                     <a href="#/playlists/{{playlist.id}}" ng-click="changePlaylist($index)">{{playlist.title}}</a> <span ng-show="isPlaying(playlist.id)" class="badge">Playing</span>
                 </td>
-                <td width="48px">
+                <td class="btn-container-right">
                     <button class="btn btn-xs btn-danger" ng-show="showRemovePlaylistButton == $index" ng-click="deletePlaylist(playlist)">
                         <i class="glyphicon glyphicon-remove"></i>
                     </button>
@@ -22,14 +22,10 @@
             <tr>
                 <td colspan="2">{{playlists.length}} playlists.</td>
             </tr>
-            <tr>
-                <!-- filter playlists -->
-                <td colspan="2"><input ng-model="query" placeholder="filter playlists..."></td>
-            </tr>
         </tfoot>
     </table>
     
-    <p>Add Playlist</p>
+    <h4>Add Playlist</h4>
 
     <form name="addPlaylistForm">
         <div class="input-group">

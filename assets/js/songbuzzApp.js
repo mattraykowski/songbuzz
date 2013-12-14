@@ -1,6 +1,6 @@
 'use strict';
 
-var songbuzzApp = angular.module('songbuzz', ['ngRoute', 'restangular', 'ui.sortable']);
+var songbuzzApp = angular.module('songbuzz', ['ngRoute', 'ngSanitize', 'restangular', 'ui.sortable']);
 
 songbuzzApp.config(['$routeProvider', '$locationProvider', 'RestangularProvider', function ($routeProvider, $locationProvider, RestangularProvider) {
     $routeProvider.when("/playlists", {

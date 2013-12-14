@@ -15,8 +15,19 @@
 .playercontainer {
     padding-bottom: 10px;
     border-bottom: 1px solid #d3d3d3;
+    height: 216px;
 }
 
 .pagecontainer {
     padding-top: 10px;
+}
+
+.btn-container-right {
+    text-align: right;
+    width: 48px;
+
+}
+
+.playlist-row {
+    height: 39px;
 }

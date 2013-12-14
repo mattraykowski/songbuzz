@@ -10,7 +10,8 @@
                     </button>
                     <button id="player-pause-btn"
                             ng-class="{'btn':true, 'btn-sm':true, 'btn-default':true, 'active':pauseState}"
-                            ng-click="pauseButton()">
+                            ng-click="pauseButton()"
+                            class="btn btn-sm btn-default">
                         <i class="glyphicon glyphicon-pause"></i>
                     </button>
                     <button id="player-stop-btn"
@@ -20,6 +21,7 @@
                     </button>
                     <button id="player-play-btn"
                             ng-class="{'btn':true, 'btn-sm':true, 'btn-default':true, 'active':playState}"
+                            class="btn btn-sm btn-default"
                             ng-click="playButton()">
                         <i class="glyphicon glyphicon-play"></i>
                     </button>
@@ -29,7 +31,7 @@
                     </button>
                 </div>
             </div>
-            <div ng-click="progressBarClick($event)" class=" "
+            <div ng-click="progressBarClick($event)" class="progress"
                  ng-class="{'progress':true, 'progress-striped':(playState||pauseState), 'active':playState}">
                 <div class="progress-bar progress-bar-info "
                      ng-click="progressBarClick($event)"
@@ -37,7 +39,8 @@
                 </div>
             </div>
             <div id="playingDescr">
-                <span class="badge">Now Playing</span>: {{ getSongTitle() }} :: {{ friendlyDuration(getCurrentDuration()) }}
+                <span class="badge">Now Playing</span>
+                <span ng-bind-html="getSongTitle() + ' :: ' + friendlyDuration(getCurrentDuration())">none :: 0s</span>
             </div>
         </div>
         <div class="col-xs-12 col-md-4">
