@@ -23,7 +23,7 @@
         "postinstall": "./node_modules/bower/bin/bower install"
     },
     "engines": {
-      "node": ">=0.10.0",
+      "node": "0.10.23",
       "npm": ">=1.2.0"
     },
     "main": "app.js",
