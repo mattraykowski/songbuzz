@@ -14,7 +14,7 @@
         "passport-github": "0.1.5",
         "passport-google-oauth": "0.1.5",
         "googleapis": "0.4.5",
-        "bower": "1.2.8",
+        "bower": "1.2.7",
         "request": "~2.16.6"
     },
     "scripts": {
