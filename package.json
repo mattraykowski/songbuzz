@@ -1,8 +1,8 @@
 {
-    "name": "sails-social-auth-example",
+    "name": "songbuzz",
     "private": true,
-    "version": "0.0.0",
-    "description": "a Sails application",
+    "version": "0.5.0",
+    "description": "SongBuzz is a 'YouTube MP3 Player'.",
     "dependencies": {
         "sails": "0.9.7",
         "grunt": "0.4.1",
