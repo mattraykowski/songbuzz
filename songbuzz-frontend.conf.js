@@ -22,7 +22,7 @@ module.exports = function(config) {
       'assets/components/bootbox/bootbox.js',
       'assets/components/jquery-ui/ui/jquery-ui.js',
       'assets/components/select2/select2.js',
-      'assets/components/lodash/lodash.js',
+      'assets/components/lodash/dist/lodash.js',
       'assets/components/noty/js/noty/jquery.noty.js',
       'assets/components/noty/js/noty/layouts/top.js',
       'assets/components/noty/js/noty/layouts/topRight.js',
