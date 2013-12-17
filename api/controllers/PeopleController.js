@@ -7,14 +7,25 @@
 
 function PeopleController() {
     this.index = function (req, res) {
-        var limit = (req.body.limit == undefined ? 10 : req.body.limit);
-        var offset = (req.body.offset == undefined ? 0 : req.body.offset);
-        User.find({limit: limit, offset: offset})
+        var peopleResults = {
+            count: 0,
+            limit: (req.query.limit == undefined ? 10 : req.query.limit),
+            offset: (req.query.offset == undefined ? 0 : req.query.offset),
+            people: []
+        };
+
+        User.count().exec(function(err, count) {
+            peopleResults.count = count;
+        });
+
+        // Grab the entries requested.
+        User.find({limit: peopleResults.limit, skip: peopleResults.offset})
             .exec(function (err, people) {
                 if (err) {
                     console.log(err);
                 } else {
-                    res.send(people);
+                    peopleResults.people = people;
+                    res.send(peopleResults);
                 }
             });
     };

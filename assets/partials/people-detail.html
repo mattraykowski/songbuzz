@@ -27,7 +27,13 @@
                     </tr>
                     </tbody>
                     <tfoot>
-                    <tr>&nbsp;
+                    <tr>
+                        <td colspan="3">
+                            <ul class="pager pager-sm" >
+                                <li ng-class="{ 'disabled': (peopleOffset==0) }"><a href="" ng-click="searchPrevPage()">&larr;</a></li>
+                                <li ng-class="{ 'disabled': (peopleOffset+peopleLimit >= peopleTotal) }"><a href="" ng-click="searchNextPage()">&rarr;</a></li>
+                            </ul>
+                        </td>
                     </tr>
                     </tfoot>
                 </table>

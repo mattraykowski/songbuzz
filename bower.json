@@ -11,7 +11,7 @@
     "jquery": "2.0.3",
     "json3": "3.2.5",
     "noty": "2.1.0",
-    "restangular": "1.1.3",
+    "restangular": "1.2.1",
     "select2": "3.4.2",
     "angular-sanitize": "~1.2.3"
   },

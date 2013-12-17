@@ -8,15 +8,32 @@ songbuzzApp.controller('PeopleController', ['$scope', '$routeParams', 'PeopleRes
 
     $scope.peopleLimit = 10;
     $scope.peopleOffset = 0;
+    $scope.peopleTotal = 0;
     $scope.people = [ ];
     $scope.playlists = [ ];
     $scope.person = { };
     $scope.currentPlaylist = null;
 
+    // Safely apply changes in the scope.
+    $scope.safeApply = function (fn) {
+        var phase = this.$root.$$phase;
+        if (phase == '$apply' || phase == '$digest') {
+            if (fn && (typeof(fn) === 'function')) {
+                fn();
+            }
+        }
+        else {
+            this.$apply(fn);
+        }
+    };
+
     $scope.fetchPeople = function () {
+        console.log($scope.peopleLimit, $scope.peopleOffset);
         PeopleRestService.getAll({limit: $scope.peopleLimit, offset: $scope.peopleOffset})
             .then(function (people) {
-                $scope.people = people;
+                $scope.peopleTotal = people.count;
+                $scope.people = people.people;
+                console.log(people.people);
             });
     };
 
@@ -44,7 +61,25 @@ songbuzzApp.controller('PeopleController', ['$scope', '$routeParams', 'PeopleRes
         $scope.personId = person.id;
 
         $scope.fetchPerson();
-    }
+    };
+
+    $scope.searchPrevPage = function() {
+        if($scope.peopleOffset < 10) {
+            $scope.peopleOffset = 0;
+        } else {
+            $scope.peopleOffset = $scope.peopleOffset - $scope.peopleLimit;
+        }
+
+        $scope.fetchPeople();
+    };
+
+    $scope.searchNextPage = function() {
+        if($scope.peopleOffset+$scope.peopleLimit < $scope.peopleTotal) {
+            $scope.peopleOffset = $scope.peopleOffset + $scope.peopleLimit;
+        }
+
+        $scope.fetchPeople();
+    };
 
 
     /*
