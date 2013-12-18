@@ -189,5 +189,20 @@ describe("PlaylistDetailController", function () {
 
             expect(scope.playingBadgeText()).toBe('playing');
         });
+    });
+
+    describe("isPlaylistModifiable", function() {
+        it("should return false if there is no playlist selected", function() {
+            scope.playlist = null;
+
+            expect(scope.isPlaylistModifiable()).toBeFalsy();
+        });
+
+        it("should return false if the playlist owner and the current user do not match", function() {
+            scope.currentUser = { id: "12c1" };
+            scope.playlist = { owner: "12c2" };
+
+            expect(scope.isPlaylistModifiable()).toBeFalsy();
+        })
     })
 });

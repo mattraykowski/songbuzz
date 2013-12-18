@@ -160,5 +160,22 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
          */
         $scope.playingBadgeText = function() {
             return PlayerService.PlayerState.stateToString(PlayerService.currentPlayerState);
+        };
+
+        /**
+         * Returns whether or not the playlist can be modified by the current user.
+         *
+         * @returns {boolean} true if the playlist can be modified.
+         */
+
+        $scope.isPlaylistModifiable = function() {
+            //playlist == null && playlist.owner != currentUser.id
+            if($scope.playlist == null) {
+                return false;
+            } else if($scope.playlist.owner != $scope.currentUser.id) {
+                return false;
+            }
+
+            return true;
         }
     }]);
