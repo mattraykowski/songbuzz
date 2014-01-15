@@ -38,11 +38,16 @@
                                 <button class="btn btn-default btn-sm" ng-click="removeSong(song)" ng-show="isPlaylistModifiable()">
                                     <i class="glyphicon glyphicon-remove"></i>
                                 </button>
+
+                                <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#playlistMoveCopyModal" ng-click="prepSongToCopyMove(song)" ng-show="isPlaylistModifiable()">
+                                    <i class="glyphicon glyphicon-edit"></i>
+                                </button>
+
                                 <button class="btn btn-default btn-sm" ng-click="playSong(song)">
                                     <i class="glyphicon glyphicon-play"></i>
                                 </button>
                             </div>
-                            <!--<i ng-show="isPlayingSong(song)" class="glyphicon glyphicon-music"></i>-->
+
                             <span class="badge" ng-show="isPlayingSong(song)" ng-bind="playingBadgeText()"></span>
                         </td>
                     </tr>
@@ -57,29 +62,37 @@
                     </tr>
                     </tfoot>
                 </table>
-
-                <!--
-                <div class="well">
-                    <p>Add Song</p>
-
-                    <div>
-                        <yt-autocomplete selection="selectedSong" list="doGetAutocomplete"></yt-autocomplete>
-                        <span>
-                          <button class="btn btn-success btn-sm" ng-click="doAddSelectedSong()" type="button"><i class="glyphicon glyphicon-plus"></i></button>
-                        </span>
-                    </div>
-                </div>
-                 -->
-
-                <!-- Disable debug info for now
-                <p>Debug Info</p>
-                <p>Saerch Terms: {{ytSearchParameter}}</p>
-                <p> Search Results:</p>
-                <p>{{searchResults}}</p>
-                <p>TBD: detail view for {{playlistId}}</p>
-                <p></p>
-                <p>{{playlist}}</p> -->
             </div>
         </div>
     </div>
+
+    <form name="moveCopyModalForm">
+    <div class="modal fade" id="playlistMoveCopyModal" tabindex="-1" role="dialog" aria-labelledby="playlistMoveCopyLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="playlistMoveCopyLabel">Move/Copy Song</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="radio" ng-repeat="playlist in playlists">
+                        <label>
+                            <input type="radio" name="playlistOptions" value="{{ playlist.id }}" ng-model="$parent.playlistToCopy">
+                            {{ playlist.title }}
+                        </label>
+                    </div>
+
+                    {{ playlistToCopy }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="copySongToPlaylist()">Copy...</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="moveSongToPlaylist()">Move...</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    </form>
 </div>

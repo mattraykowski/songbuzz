@@ -12,6 +12,8 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
         $scope.player = {};
         $scope.songDone = true;
         $scope.progress = 0;
+        $scope.prepSong = {};
+        $scope.playlistToCopy = '';
 
         //@tested
         $scope.$on('changePlaylist', function () {
@@ -25,6 +27,17 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
             });
 
         };
+
+
+        /**
+         * Retrieves a list of playlists from the server - same method as the playlist list.
+         */
+        $scope.fetchPlaylists = function() {
+            PlaylistRestService.getAll().then(
+                function (playlists) {
+                    $scope.playlists = playlists;
+                });
+        }
 
         /**
          * Performs the initial controller creation fetch.
@@ -75,7 +88,7 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
          * Using an index it finds a song in the current playlist
          * and removes it from the songs array.
          *
-         * @param idx {Number} Index location of the song to remove.
+         * @param song {Object} a song object.
          */
         $scope.removeSong = function (song) {
             bootbox.confirm("Are you sure you want to remove this song?", function (result) {
@@ -177,5 +190,44 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
             }
 
             return true;
-        }
+        };
+
+
+        // TODO test this
+        $scope.prepSongToCopyMove = function(song) {
+            $scope.prepSong = song;
+            $scope.fetchPlaylists();
+        };
+
+        // TODO implement this.
+        $scope.copySongToPlaylist = function() {
+            //console.log("playlist id: " + $scope.playlistToCopy);
+            // Get playlist as target playlist
+            PlaylistRestService.get($scope.playlistToCopy).then(function(targetPlaylist) {
+                //console.log(targetPlaylist);
+                // put prepSong on the playlist
+                if(targetPlaylist.songs === undefined) {
+                    targetPlaylist.songs = [];
+                }
+
+                //console.log("pushing song: " + $scope.prepSong.title + " to playlist (" + $scope.playlistToCopy + ") :: " + targetPlaylist.title);
+                targetPlaylist.songs.push($scope.prepSong);
+                //console.log("saving song")
+                targetPlaylist.put();
+                //console.log("saved")
+            });
+        };
+
+        $scope.moveSongToPlaylist = function() {
+            $scope.copySongToPlaylist();
+
+            // splice the song out of the current playlist
+            var idx = $scope.findSongInPlaylist($scope.prepSong.videoId);
+            $scope.playlist.songs.splice(idx, 1);
+
+            // save both playlists.
+            $scope.playlist.put();
+        };
+
+        // moveCopyPlaylistId
     }]);
