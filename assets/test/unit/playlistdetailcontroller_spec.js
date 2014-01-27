@@ -136,7 +136,28 @@ describe("PlaylistDetailController", function () {
             scope.fetchPlaylist(samplePlaylists[1].id);
             expect(PlaylistRestService.get).toHaveBeenCalledWith(samplePlaylists[1].id);
         }));
-    })
+
+        it("should call PlayerService to change the playlist", inject(function ($rootScope, PlaylistRestService) {
+            spyOn(PlaylistRestService, 'get').andReturn(getThenObject(samplePlaylists[1]))
+            spyOn(PlayerService, 'changePlaylist');
+            scope.fetchPlaylist(samplePlaylists[1].id);
+
+            expect(PlayerService.changePlaylist).toHaveBeenCalledWith(samplePlaylists[1]);
+        }));
+
+        describe("when initial play is true", function() {
+            it("should call PlayerService to change the playlist", inject(function ($rootScope, PlaylistRestService) {
+                spyOn(PlaylistRestService, 'get').andReturn(getThenObject(samplePlaylists[1]))
+                spyOn(PlayerService, 'changePlaylist');
+                spyOn(PlayerService, 'playIndex');
+                scope.initialPlay = true;
+
+                scope.fetchPlaylist(samplePlaylists[1].id);
+
+                expect(PlayerService.playIndex).toHaveBeenCalledWith(0);
+            }));
+        });
+    });
 
     describe("doAddSelectedSong", function () {
         it("should add new songs to playlists from the search results", function () {

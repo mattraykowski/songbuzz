@@ -12,9 +12,16 @@
                     <a href="#/playlists/{{playlist.id}}" ng-click="changePlaylist($index)">{{playlist.title}}</a> <span ng-show="isPlaying(playlist.id)" class="badge">Playing</span>
                 </td>
                 <td class="btn-container-right">
-                    <button class="btn btn-xs btn-danger" ng-show="showRemovePlaylistButton == $index" ng-click="deletePlaylist(playlist)">
-                        <i class="glyphicon glyphicon-remove"></i>
-                    </button>
+                    <div class="btn-group">
+                        <button class="btn btn-xs btn-default" ng-show="showRemovePlaylistButton == $index"
+                                ng-click="changePlaylist($index, true)">
+                            <i class="glyphicon glyphicon-play"></i>
+                        </button>
+                        <button class="btn btn-xs btn-default" ng-show="showRemovePlaylistButton == $index"
+                                ng-click="deletePlaylist(playlist)">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </button>
+                    </div>
                 </td>
             </tr>
         </tbody>

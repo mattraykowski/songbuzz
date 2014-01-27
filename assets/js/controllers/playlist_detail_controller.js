@@ -14,6 +14,7 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
         $scope.progress = 0;
         $scope.prepSong = {};
         $scope.playlistToCopy = '';
+        $scope.initialPlay = false;
 
         //@tested
         $scope.$on('changePlaylist', function () {
@@ -23,7 +24,12 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
         $scope.fetchPlaylist = function(playlistId) {
             PlaylistRestService.get(playlistId).then(function(playlist) {
                 $scope.playlist = playlist;
+                console.log($scope.playlist);
                 PlayerService.changePlaylist($scope.playlist);
+
+                if($scope.initialPlay) {
+                    PlayerService.playIndex(0);
+                }
             });
 
         };
@@ -48,6 +54,12 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
          * 4. default object to null (view hides/shows based on this.)
          */
         $scope.initialFetch = function() {
+            // First save the state of the initial play parameter.
+            if($routeParams.play && $routeParams.play == true) {
+                $scope.initialPlay = true;
+            }
+
+            // Determine the correct initial playlist to load.
             if ($routeParams.playlistId) {
                 $scope.fetchPlaylist($routeParams.playlistId);
             } else if (PlayerService.playingPlaylist != undefined && !_.isEmpty(PlayerService.playingPlaylist)) {

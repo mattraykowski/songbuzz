@@ -34,8 +34,13 @@ songbuzzApp.controller('PlaylistListController', ['$scope', '$location', 'Player
             });
         };
 
-        $scope.changePlaylist = function (idx) {
-            $location.path('/playlists/'+$scope.playlists[idx].id);
+        $scope.changePlaylist = function (idx, play) {
+            var loc = '/playlists/'+$scope.playlists[idx].id;
+            if(play) {
+                $location.path(loc).search('play', true);
+            } else {
+                $location.path(loc);
+            }
         };
 
         $scope.isPlaying = function(playlistId) {

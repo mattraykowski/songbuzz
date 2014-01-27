@@ -79,6 +79,19 @@ describe("PlaylistListController", function() {
             scope.changePlaylist(idx);
             expect($location.path()).toBe('/playlists/' + samplePlaylists[idx].id);
         }));
+
+        describe("when play is true", function() {
+            it("should change location to the detailed view with the play query parameter", inject(function($location) {
+                var idx = 1;
+                scope.playlists = samplePlaylists;
+
+                scope.changePlaylist(idx, true);
+                expect($location.path()).toBe('/playlists/' + samplePlaylists[idx].id);
+                expect($location.search().play).toBeTruthy();
+
+
+            }));
+        });
     });
 
     describe("isPlaying", function() {
