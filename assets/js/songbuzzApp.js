@@ -48,5 +48,6 @@ window.onload = function () {
     var frames = document.getElementsByTagName("iframe");
     for (var i = 0; i < frames.length; i++) {
         frames[i].src += "&wmode=transparent";
+        frames[i].src += "&html5=1";
     }
 }
