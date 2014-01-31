@@ -46,6 +46,10 @@ module.exports.adapters = {
       user     : process.env.SB_MONGO_USER || '',
       password : process.env.SB_MONGO_PASS || '',
       database : process.env.SB_MONGO_DB || 'songbuzz'
+  } ,
+
+  test: {
+    module: 'sails-memory'
   }
 
 };

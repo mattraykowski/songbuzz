@@ -1,0 +1,38 @@
+[
+    {
+        "_id": "523757da1888ad0200000005",
+        "createdAt": "2013-09-16T19:11:22.847Z",
+        "owner": "523757361888ad0200000002",
+        "songs": [
+            {
+                "title": "WHY? - Strawberries (Official Video)",
+                "viewCount": 0,
+                "videoId": "47u8kSRusfE",
+                "thumbUrl": "https://i.ytimg.com/vi/47u8kSRusfE/default.jpg"
+            }
+        ],
+        "title": "hipsters",
+        "updatedAt": "2013-09-16T20:23:24.732Z"
+    },
+    {
+        "_id": "52555278e693450200000001",
+        "createdAt": "2013-10-09T12:56:24.735Z",
+        "owner": "52332e8f55ac9d5637000001",
+        "songs": [
+            {
+                "title": "Jaymes Young  -Waiting For The Sun",
+                "viewCount": 0,
+                "videoId": "M46L5rYutYA",
+                "thumbUrl": "https://i.ytimg.com/vi/M46L5rYutYA/default.jpg"
+            },
+            {
+                "title": "Jaymes Young - Moondust",
+                "viewCount": 0,
+                "videoId": "nGhes-VIC94",
+                "thumbUrl": "https://i.ytimg.com/vi/nGhes-VIC94/default.jpg"
+            }
+        ],
+        "title": "Jaymes Young",
+        "updatedAt": "2013-11-06T04:54:32.820Z"
+    }
+]
