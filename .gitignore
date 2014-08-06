@@ -37,6 +37,9 @@ assets/components
 nbproject
 .idea
 SongBuzz
+SongBuzzFrontend
+SongBuzzSails
+selenium
 
 
 ########################
