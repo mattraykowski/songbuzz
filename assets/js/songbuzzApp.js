@@ -25,29 +25,3 @@ songbuzzApp.config(['$routeProvider', '$locationProvider', 'RestangularProvider'
 
     RestangularProvider.setBaseUrl('');
 }]);
-
-// Broadcast the YouTube event to the PlayerService.
-window.onYouTubeIframeAPIReady = function () {
-    var checkAngularReady = function () {
-        var scope = angular.element(document).scope();
-        if (scope == undefined) {
-            setTimeout(checkAngularReady, 250);
-        } else {
-            scope.$broadcast('ytPlayerAPIReady');
-        }
-    }
-    checkAngularReady();
-}
-
-var tag = document.createElement('script');
-tag.src = "http://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-window.onload = function () {
-    var frames = document.getElementsByTagName("iframe");
-    for (var i = 0; i < frames.length; i++) {
-        frames[i].src += "&wmode=transparent";
-        frames[i].src += "&html5=1";
-    }
-}
