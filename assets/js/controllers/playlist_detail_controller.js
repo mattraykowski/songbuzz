@@ -24,7 +24,6 @@ songbuzzApp.controller('PlaylistDetailController', ['$rootScope',
         $scope.fetchPlaylist = function(playlistId) {
             PlaylistRestService.get(playlistId).then(function(playlist) {
                 $scope.playlist = playlist;
-                console.log($scope.playlist);
                 PlayerService.changePlaylist($scope.playlist);
 
                 if($scope.initialPlay) {
