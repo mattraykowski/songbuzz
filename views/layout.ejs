@@ -99,7 +99,7 @@
 // Broadcast the YouTube event to the PlayerService.
 window.onYouTubeIframeAPIReady = function () {
     var checkAngularReady = function () {
-        if(angular != undefined) {
+        if(typeof angular !== 'undefined') {
             var scope = angular.element(document).scope();
             if (scope == undefined) {
                 setTimeout(checkAngularReady, 250);
