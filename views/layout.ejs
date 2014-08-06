@@ -94,6 +94,29 @@
     <%- body %>
 </div>
 
+<!-- YouTube API -->
+<script type="text/javascript">
+// Broadcast the YouTube event to the PlayerService.
+window.onYouTubeIframeAPIReady = function () {
+    var checkAngularReady = function () {
+        if(angular != undefined) {
+            var scope = angular.element(document).scope();
+            if (scope == undefined) {
+                setTimeout(checkAngularReady, 250);
+            } else {
+                scope.$broadcast('ytPlayerAPIReady');
+            }
+        }
+    }
+    checkAngularReady();
+};
+
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+</script>
 
 <!-- A few key dependencies, linked in order -->
 

@@ -1,6 +1,18 @@
 'use strict';
 
 songbuzzApp.factory('PlayerService', function ($rootScope) {
+    //var ytPlayer = {};
+
+    var setPlayerStateChange = function (event) {
+        // This code is actually served up by the YT API, we need the actual service.
+        var injector = angular.element(document).injector();
+        var playerService = injector.get('PlayerService');
+        playerService.currentPlayerState = event.data;
+
+        $rootScope.$broadcast('ytPlayerStateChanged', playerService.currentSong, playerService.currentPlayerState);
+    };
+
+
     var playerService = {
         ytPlayer: {}, // this will hold the youtube API.
         // Player States
@@ -72,7 +84,7 @@ songbuzzApp.factory('PlayerService', function ($rootScope) {
                 },
                 events: {
                     'onReady': plrFn,
-                    'onStateChange': this.setPlayerStateChange
+                    'onStateChange': setPlayerStateChange
                 }
             });
         },
@@ -91,6 +103,7 @@ songbuzzApp.factory('PlayerService', function ($rootScope) {
             var injector = angular.element(document).injector();
             var playerService = injector.get('PlayerService');
             playerService.currentPlayerState = event.data;
+
             $rootScope.$broadcast('ytPlayerStateChanged', playerService.currentSong, playerService.currentPlayerState);
         },
 
