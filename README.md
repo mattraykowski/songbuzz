@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/mattraykowski/songbuzz.png?label=ready&title=Ready)](https://waffle.io/mattraykowski/songbuzz)
 # SongBuzz
 ### A YouTube/Last.fm Mashup
 
